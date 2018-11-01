@@ -1,18 +1,15 @@
-import { reducers } from 'redux';
+import { ADD_PLACES } from './actionTypes'
 
 const defaultState = {
   places: [],
-
 };
 
 
 export default (state = defaultState, action) => {
-    switch (action.type) {
-      case "ADD_PLACES":
-      return {...state, places: state.places.concat(action.payload)}
-      default:
-
-    }
+  switch (action.type) {
+    case "ADD_PLACES":
+    return {...state, places: state.places.concat(action.payload)}
+  default:
     return state;
   }
 }

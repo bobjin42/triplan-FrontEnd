@@ -3,6 +3,9 @@ import PlaceDetail from './PlaceDetail';
 import { Card, Tab } from 'semantic-ui-react';
 import { connect } from 'react-redux'
 import styled from 'styled-components';
+import store from '../store';
+import { connet } from 'react-redux';
+import { addPlaces } from '../store/actions';
 // import { addPlaces } from '../store/actions'
 
 const Container = styled.div`
@@ -11,17 +14,17 @@ const Container = styled.div`
 
 class Show extends Component {
 
-  state = {
-    places: [],
+state = {
     SelectedPOIs: []
   }
+
 
 componentDidMount() {
   fetch("http://localhost:3001/api/v1/locations")
   .then(res => res.json())
-  .then(places => this.setState({
-    places
-  }))
+  .then(places => {
+    this.props.addPlaces(places)
+  })
 }
 
 selectedpois = (place) => {
@@ -48,7 +51,7 @@ removepois = (place) => {
       <Container>
         <Tab panes={panes} />
         <Card.Group itemsPerRow={5}>
-          {this.state.places.map(place => {
+          {this.props.places.map(place => {
             return <PlaceDetail selectedpois={this.selectedpois} removepois={this.removepois} key={place.id} id={place.api_id} place={place}/>
           })}
         </Card.Group>
@@ -57,4 +60,11 @@ removepois = (place) => {
   }
 }
 
-export default Show;
+  function mapStateToProps(state) {
+    return {
+      places: state.places
+    }
+  }
+
+
+export default connect(mapStateToProps, {addPlaces})(Show)
