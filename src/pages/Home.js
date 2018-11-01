@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import gif from '../icon/background.gif';
+// import gif from '../icon/background.gif';
 import styled from 'styled-components'
 
 const Container = styled.img`
@@ -25,7 +25,7 @@ class Home extends Component {
   render() {
     return (
       <Fragment>
-        <img src={gif} />
+  
         <SearchBox>123</SearchBox>
       </Fragment>
     );
@@ -34,3 +34,5 @@ class Home extends Component {
 }
 
 export default Home;
+
+// <img src={gif} />
