@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import initialData from './initialData';
 import Column from './column';
+import Calender from './calender'
 import '@atlaskit/css-reset';
 import { DragDropContext } from 'react-beautiful-dnd';
 import styled from 'styled-components';
@@ -77,15 +78,15 @@ class SelectedPOIs extends Component {
     };
 
   render() {
-    console.log(this.state);
+    const column = this.state.columns['column-2'];
+    const tasks = column.taskIds.map(taskId => this.state.tasks[taskId])
+    const calender = this.state.columns['column-1']
+    const schedual = calender.taskIds.map(taskId => this.state.tasks[taskId])
     return (
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Container>
-          {this.state.columnOrder.map(columnId => {
-            const column = this.state.columns[columnId];
-            const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
-            return <Column key={column.id} column={column} tasks={tasks} />
-          })}
+            <Calender key={calender.id} calender={calender} schedual={schedual}/>
+            <Column key={column.id} column={column} tasks={tasks}/>
           </Container>
         </DragDropContext>
     );

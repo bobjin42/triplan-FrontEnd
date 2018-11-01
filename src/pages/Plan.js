@@ -7,8 +7,11 @@ class Plan extends Component {
 
   render() {
     return (
-      <Grid columns={2} divided>
-        <Grid.Column width={10}>
+      <Grid columns={3} divided>
+        <Grid.Column width={1}>
+
+        </Grid.Column>
+        <Grid.Column width={9}>
           <SelectedPOIs />
         </Grid.Column>
         <Grid.Column width={6}>

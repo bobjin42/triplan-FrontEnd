@@ -1,12 +1,18 @@
 import { reducers } from 'redux';
 
 const defaultState = {
-  place: [],
+  places: [],
+
 };
 
 
-export function userReducer(state = defaultState, action) {
+export default (state = defaultState, action) => {
+    switch (action.type) {
+      case "ADD_PLACES":
+      return {...state, places: state.places.concat(action.payload)}
+      default:
 
+    }
     return state;
   }
 }
