@@ -7,6 +7,7 @@
     "exploder": "^1.0.0",
     "leaflet": "^1.3.4",
     "react": "^16.6.0",
+    "react-background-video-player": "^1.1.5",
     "react-beautiful-dnd": "^9.0.2",
     "react-dom": "^16.6.0",
     "react-gif": "^0.1.0",

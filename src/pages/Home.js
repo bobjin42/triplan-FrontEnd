@@ -1,32 +1,20 @@
 import React, { Component, Fragment } from 'react';
-// import gif from '../icon/background.gif';
 import styled from 'styled-components'
+import Video from '../icon/Untitled.mp4'
 
-const Container = styled.img`
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-`;
-
-const SearchBox = styled.div`
-  background-color: white;
-  box-sizing: border-box;
-  border-radius: 2px;
-  z-index:1
-  width:320px;
-  margin: 20px 20px 0px 20px
-  padding: 20px 20px 30px 20px
-  display:inline-block
-  text-aligh: left;
-`
 
 class Home extends Component {
   render() {
+    const video = {
+      src: '../icon/Untitled.mp4'
+    }
     return (
       <Fragment>
-  
-        <SearchBox>123</SearchBox>
+        <video id="background-video" loop autoPlay>
+         <source src={Video} type="video/mp4" />
+         <source src={Video} type="video/ogg" />
+        </video>
+
       </Fragment>
     );
   }

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Card, Image, Button } from 'semantic-ui-react'
+import { addToSelectedPois, removeFromPois } from '../store/actions'
 
 class PlaceDetail extends Component {
 
@@ -8,12 +10,12 @@ state = {
 }
 
 handleClickAdd = () => {
-  this.props.selectedpois(this.props.place)
+  this.props.dispatch(addToSelectedPois(this.props.place))
   this.setState({clicked: !this.state.clicked})
 }
 
 handleClickRemove = () => {
-  this.props.removepois(this.props.place)
+  this.props.dispatch(removeFromPois(this.props.place))
   this.setState({clicked: !this.state.clicked})
 }
 
@@ -41,7 +43,7 @@ handleClickRemove = () => {
       </Card>
     );
   }
-
 }
 
-export default PlaceDetail;
+
+export default connect()(PlaceDetail);

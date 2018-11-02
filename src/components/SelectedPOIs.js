@@ -5,10 +5,11 @@ import Calender from './calender'
 import '@atlaskit/css-reset';
 import { DragDropContext } from 'react-beautiful-dnd';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 const Container = styled.div`
   display: flex
-`
+`;
 
 class SelectedPOIs extends Component {
 
@@ -78,6 +79,7 @@ class SelectedPOIs extends Component {
     };
 
   render() {
+    console.log(this.props.SelectedPlaces);
     const column = this.state.columns['column-2'];
     const tasks = column.taskIds.map(taskId => this.state.tasks[taskId])
     const calender = this.state.columns['column-1']
@@ -91,7 +93,12 @@ class SelectedPOIs extends Component {
         </DragDropContext>
     );
   }
-
 }
 
-export default SelectedPOIs;
+function mapStateToProps(state) {
+  return {
+    SelectedPlaces: state.SelectedPlaces
+  }
+}
+
+export default connect(mapStateToProps, null)(SelectedPOIs);
