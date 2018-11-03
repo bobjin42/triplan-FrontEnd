@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
-import { Map, TileLayer, Marker, Popup} from 'react-leaflet'
-import L from 'leaflet'
-
+import { Map, TileLayer, Marker, Popup} from 'react-leaflet';
+import L from 'leaflet';
+import { connect } from 'react-redux';
 
 class MapWrapper extends Component {
 
   render() {
-    const positions = [[40.7484312, -73.9856567], [40.757951, -73.9856027], [40.7115133, -74.0133146]]
+    const initialStart = [40.757951, -73.9856027]
+    const allPlaces = this.props.places
+    const schedualOrderIds = this.props.schedualPlaces;
+    const positions = []
+    const targetPlace = schedualOrderIds.map(id => {
+      return allPlaces.find(place => {
+        return place.api_id === id;
+      })
+    })
+    targetPlace.forEach(place => {
+      positions.push([Number(place.lat), Number(place.lng)])
+    })
+
     const icon = [L.icon({
       iconUrl: require('../icon/1.png'),
       iconSize: [40,40]
@@ -21,7 +33,7 @@ class MapWrapper extends Component {
 
     return (
       <div id="mapid">
-        <Map center={positions[0]} zoom={12}>
+        <Map center={initialStart} zoom={12}>
          <TileLayer
          url='https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png'
          attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
@@ -40,4 +52,11 @@ class MapWrapper extends Component {
 
 }
 
-export default MapWrapper;
+function mapStateToProps(state) {
+  return{
+    schedualPlaces: state.schedualPlaces,
+    places: state.places
+  }
+}
+
+export default connect(mapStateToProps)(MapWrapper);

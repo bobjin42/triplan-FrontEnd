@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import initialData from './initialData';
 import Column from './column';
 import Calender from './calender'
 import '@atlaskit/css-reset';
 import { DragDropContext } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { schedualedPlace } from '../store/actions'
 
 const Container = styled.div`
   display: flex
@@ -13,7 +13,50 @@ const Container = styled.div`
 
 class SelectedPOIs extends Component {
 
-  state = initialData;
+  componentDidMount() {
+    const selectedArrar = this.props.selectedPlaces.map(place => {
+      return {id: place.api_id, name: place.name}
+    })
+    const arrayToObject = (array) =>
+      array.reduce((obj, item) => {
+        obj[item.id] = item
+      return obj
+      }, {})
+    const changedObj = arrayToObject(selectedArrar)
+    const ids = Object.keys(changedObj)
+    this.setState({
+      tasks: changedObj,
+      columns: {
+        ...this.state.columns,
+        ["column-2"]: {
+          ...this.state.columns["column-2"],
+          taskIds: ids
+        }
+      }
+    })
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      tasks: {
+
+      },
+      columns: {
+        'column-1': {
+          id:'column-1',
+          title: 'Day 1',
+          taskIds: [],
+        },
+        'column-2': {
+          id:'column-2',
+          title: 'Selected POIs',
+          taskIds: []
+        },
+      },
+      columnOrder: ['column-1', 'column-2']
+    };
+  }
 
   onDragEnd = result => {
     const { destination, source, draggableId } = result;
@@ -49,7 +92,9 @@ class SelectedPOIs extends Component {
           [newColumn.id]:newColumn,
         }
       }
-        this.setState(newState);
+        this.setState(newState, () => {
+          this.props.dispatch(schedualedPlace(this.state.columns['column-1'].taskIds))
+        });
         return;
       };
 
@@ -75,13 +120,16 @@ class SelectedPOIs extends Component {
           [newFinish.id]: newFinish,
         },
       };
-      this.setState(newState)
+      this.setState(newState, () => {
+        this.props.dispatch(schedualedPlace(this.state.columns['column-1'].taskIds))
+      })
+
     };
 
   render() {
-    console.log(this.props.SelectedPlaces);
     const column = this.state.columns['column-2'];
     const tasks = column.taskIds.map(taskId => this.state.tasks[taskId])
+    console.log(this.state);
     const calender = this.state.columns['column-1']
     const schedual = calender.taskIds.map(taskId => this.state.tasks[taskId])
     return (
@@ -97,8 +145,9 @@ class SelectedPOIs extends Component {
 
 function mapStateToProps(state) {
   return {
-    SelectedPlaces: state.SelectedPlaces
+    selectedPlaces: state.selectedPlaces
   }
 }
 
-export default connect(mapStateToProps, null)(SelectedPOIs);
+
+export default connect(mapStateToProps)(SelectedPOIs);

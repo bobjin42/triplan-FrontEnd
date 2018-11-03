@@ -3,8 +3,6 @@ import PlaceDetail from './PlaceDetail';
 import { Card, Tab, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux'
 import styled from 'styled-components';
-import store from '../store';
-import { connet } from 'react-redux';
 import { addPlaces } from '../store/actions';
 import { NavLink } from 'react-router-dom'
 
@@ -25,7 +23,7 @@ componentDidMount() {
   render() {
     const panes = [
       { menuItem: 'City Detail', render: () => <Tab.Pane>Tab 1 Content</Tab.Pane> },
-      { menuItem: 'POIs for planging', render: () => <Tab.Pane>{this.props.SelectedPlaces.map(place => <p key={place.id}>{place.name}</p>)}<NavLink exact to='/plan'><Button primary>Go to plan</Button></NavLink></Tab.Pane> },
+      { menuItem: 'POIs for planging', render: () => <Tab.Pane>{this.props.selectedPlaces.map(place => <p key={place.id}>{place.name}</p>)}<NavLink exact to='/plan'><Button primary>Go to plan</Button></NavLink></Tab.Pane> },
       { menuItem: 'Shared plans', render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
     ]
     return(
@@ -44,7 +42,7 @@ componentDidMount() {
   function mapStateToProps(state) {
     return {
       places: state.places,
-      SelectedPlaces: state.SelectedPlaces
+      selectedPlaces: state.selectedPlaces
     }
   }
 
