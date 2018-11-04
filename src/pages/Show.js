@@ -4,7 +4,7 @@ import { Card, Tab, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux'
 import styled from 'styled-components';
 import { addPlaces } from '../store/actions';
-import { NavLink } from 'react-router-dom'
+import { withRouter } from 'react-router';
 
 const Container = styled.div`
   padding: 10px;
@@ -12,18 +12,41 @@ const Container = styled.div`
 
 class Show extends Component {
 
+  state = {
+    detailPlace: [],
+    targetId: ""
+  }
+
 componentDidMount() {
   fetch("http://localhost:3001/api/v1/locations")
   .then(res => res.json())
   .then(places => {
     this.props.fetchPlaces(places)
   })
+  fetch('http://localhost:5000/detail')
+  .then(res => res.json())
+  .then(data => {
+    this.setState({
+      detailPlace: data
+    })
+  })
+}
+
+goToPlan = () => {
+  this.props.history.push('/plan')
+}
+
+targerDetailPlace = (id) => {
+  this.setState({
+    targetId: id
+  })
 }
 
   render() {
+    console.log(this.state.detailPlace);
     const panes = [
       { menuItem: 'City Detail', render: () => <Tab.Pane>Tab 1 Content</Tab.Pane> },
-      { menuItem: 'POIs for planging', render: () => <Tab.Pane>{this.props.selectedPlaces.map(place => <p key={place.id}>{place.name}</p>)}<NavLink exact to='/plan'><Button primary>Go to plan</Button></NavLink></Tab.Pane> },
+      { menuItem: 'POIs for planging', render: () => <Tab.Pane>{this.props.selectedPlaces.map(place => <p key={place.id}>{place.name}</p>)}<Button primary onClick={this.goToPlan}>Go to plan</Button></Tab.Pane> },
       { menuItem: 'Shared plans', render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
     ]
     return(
@@ -31,7 +54,7 @@ componentDidMount() {
         <Tab panes={panes} />
         <Card.Group itemsPerRow={5}>
           {this.props.places.map(place => {
-            return <PlaceDetail selectedpois={this.selectedpois} removepois={this.removepois} key={place.id} id={place.api_id} place={place}/>
+            return <PlaceDetail targerDetailPlace={this.targerDetailPlace} detailPlace={this.state.detailPlace[0].data.place} selectedpois={this.selectedpois} removepois={this.removepois} key={place.id} id={place.api_id} place={place}/>
           })}
         </Card.Group>
       </Container>
@@ -55,4 +78,4 @@ componentDidMount() {
   }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Show)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Show))

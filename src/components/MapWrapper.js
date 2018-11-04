@@ -33,7 +33,7 @@ class MapWrapper extends Component {
 
     return (
       <div id="mapid">
-        <Map center={initialStart} zoom={12}>
+        <Map center={positions.length === 0 ? initialStart : positions[0]} zoom={12}>
          <TileLayer
          url='https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png'
          attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
