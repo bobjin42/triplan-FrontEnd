@@ -48,7 +48,7 @@ handleClickRemove = () => {
               </List.Content>
             </List.Item>
             <List.Item>
-              <List.Icon name='facebook f' size='small' verticalAlign='middle' />
+              <List.Icon name='facebook square' size='small' verticalAlign='middle' />
               <List.Content>
                 <List.Header><a href={detailPlace.references[2].url} target="_blank">Facebook Page</a></List.Header>
               </List.Content>

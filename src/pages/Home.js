@@ -1,7 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import styled from 'styled-components'
 import Video from '../icon/Untitled.mp4'
-import { Icon, Input } from 'semantic-ui-react'
+import { Icon, Input, Modal } from 'semantic-ui-react'
+import { DateRange } from 'react-date-range';
+import { format } from 'date-fns'
+import { withRouter } from 'react-router';
 
 const Container = styled.div`
   color: rgba(0, 0, 0, 0.87);
@@ -11,16 +14,35 @@ const Container = styled.div`
   font-family: Metropolis, Roboto, sans-serif;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
-  border-radius: 2px;
+  border-radius: 10px;
   z-index: 1;
-  width: 320px;
-  margin: 20px 20px 0px;
-  padding: 20px 20px 30px;
+  width: 250px;
+  margin: 10px 20px 200px;
+  padding: 20px 20px 20px 20px;
   display: inline-block;
   text-align: left;
 `;
 
 class Home extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      startDate: "",
+      endDate: ""
+    };
+  }
+
+  handleSelect = (range) => {
+    this.setState({
+      startDate: format(range.startDate._d, 'MM/DD/YYYY'),
+      endDate: format(range.endDate._d, 'MM/DD/YYYY')
+    })
+  }
+
+  goToShow = () => {
+    this.props.history.push('/show')
+  }
 
   render() {
     const video = {
@@ -35,7 +57,16 @@ class Home extends Component {
           </video>
           <div>
             <Container className="searchContainer">
-              <Input icon={<Icon name='search' inverted circular link />} placeholder='Search...' />
+              <Input icon='plane' iconPosition='left' placeholder='Search places...' />
+              <Modal trigger={<Input icon={<Icon name='search' inverted circular link onClick={this.goToShow}/>} placeholder='Search...'
+                value={this.state.startDate && this.state.endDate !== "" ? this.state.startDate + " ~ " + this.state.endDate : ""}
+                />
+              }>
+                <DateRange
+                  onInit={this.handleSelect}
+                  onChange={this.handleSelect}
+                  />
+              </Modal>
             </Container>
           </div>
         </div>
@@ -45,4 +76,4 @@ class Home extends Component {
 
 }
 
-export default Home;
+export default withRouter(Home);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PlaceDetail from './PlaceDetail';
-import { Card, Tab, Button } from 'semantic-ui-react';
+import { Card, Tab, Button, Label } from 'semantic-ui-react';
 import { connect } from 'react-redux'
 import styled from 'styled-components';
 import { addPlaces } from '../store/actions';
@@ -46,12 +46,15 @@ targerDetailPlace = (id) => {
     console.log(this.state.detailPlace);
     const panes = [
       { menuItem: 'City Detail', render: () => <Tab.Pane>Tab 1 Content</Tab.Pane> },
-      { menuItem: 'POIs for planging', render: () => <Tab.Pane>{this.props.selectedPlaces.map(place => <p key={place.id}>{place.name}</p>)}<Button primary onClick={this.goToPlan}>Go to plan</Button></Tab.Pane> },
+      { menuItem: 'POIs for planging', render: () => <Tab.Pane>
+        {this.props.selectedPlaces.map(place => <Label color='teal' tag key={place.id}>{place.name}</Label>)}
+        {this.props.selectedPlaces.length === 0 ? null : <Button className="selectedpois_btn" secondary size="tiny" onClick={this.goToPlan}>Go to plan</Button>}</Tab.Pane>
+      },
       { menuItem: 'Shared plans', render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
     ]
     return(
       <Container>
-        <Tab panes={panes} />
+          <Tab panes={panes} />
         <Card.Group itemsPerRow={5}>
           {this.props.places.map(place => {
             return <PlaceDetail targerDetailPlace={this.targerDetailPlace} detailPlace={this.state.detailPlace[0].data.place} selectedpois={this.selectedpois} removepois={this.removepois} key={place.id} id={place.api_id} place={place}/>

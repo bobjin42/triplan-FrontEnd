@@ -28,6 +28,9 @@ class MapWrapper extends Component {
     }), L.icon({
       iconUrl: require('../icon/download.png'),
       iconSize: [40,40]
+    }), L.icon({
+      iconUrl: require('../icon/number-4-icon-1.png'),
+      iconSize: [40,40]
     })
     ]
 

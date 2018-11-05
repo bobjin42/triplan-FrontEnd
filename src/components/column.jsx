@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Poi from './poi';
 import { Droppable } from 'react-beautiful-dnd';
+import OverflowScrolling from 'react-overflow-scrolling';
 
 const Container = styled.div`
   margin: 8px;
@@ -32,6 +33,7 @@ class Column extends Component {
     return (
       <Container>
         <Title>{this.props.column.title}</Title>
+        <OverflowScrolling className='overflow-scrolling'>
         <Droppable droppableId={this.props.column.id}>
         {(provided, snapshot) => (
           <TaskList
@@ -44,6 +46,7 @@ class Column extends Component {
           </TaskList>
         )}
         </Droppable>
+        </OverflowScrolling>
       </Container>
     );
   }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Poi from './poi';
 import { Droppable } from 'react-beautiful-dnd';
+import OverflowScrolling from 'react-overflow-scrolling';
 
   const Container = styled.div`
     margin: 8px;
@@ -29,6 +30,7 @@ import { Droppable } from 'react-beautiful-dnd';
       return (
         <Container>
           <Title>{this.props.calender.title}</Title>
+          <OverflowScrolling className='overflow-scrolling'>
           <Droppable droppableId={this.props.calender.id}>
           {(provided, snapshot) => (
             <TaskList
@@ -41,6 +43,7 @@ import { Droppable } from 'react-beautiful-dnd';
             </TaskList>
           )}
           </Droppable>
+          </OverflowScrolling>
         </Container>
       );
     }
