@@ -3,7 +3,7 @@ import PlaceDetail from './PlaceDetail';
 import { Card, Tab, Button, Label, Item, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { addPlaces, fetchPlaces, fetchCityDetail, fetchPOIsDetail } from '../store/actions';
+import { fetchPlaces, fetchCityDetail, fetchPOIsDetail } from '../store/actions';
 import { withRouter } from 'react-router';
 
 const Container = styled.div`
@@ -11,10 +11,6 @@ const Container = styled.div`
 `;
 
 class Show extends Component {
-
-  state = {
-    targetId: "",
-  };
 
 componentDidMount(){
   this.props.dispatch(fetchPlaces())
@@ -79,7 +75,7 @@ targerDetailPlace = (id) => {
           <Tab panes={panes} />
         <Card.Group itemsPerRow={5}>
           {this.props.places.map(place => {
-            return <PlaceDetail  detailPlace={this.props.detailPlace[0].data.place} key={place.id} id={place.api_id} place={place}/>
+            return <PlaceDetail key={place.id} id={place.api_id} place={place}/>
           })}
         </Card.Group>
       </Container>

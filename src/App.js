@@ -1,18 +1,23 @@
 import React, { Component, Fragment } from 'react';
 import './App.css';
-import Plan from './pages/Plan'
-
+import { Route, Switch, withRouter } from 'react-router-dom';
+import Plan from './pages/Plan';
+import Nav from './pages/Nav';
 
 class App extends Component {
 
   render() {
     return (
       <Fragment>
-        <Plan />
-        <Show />
+        <Nav />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/show" component={Show} />
+          <Route exact path="/plan" component={Plan} />
+        </Switch>
       </Fragment>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

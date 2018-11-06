@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { startDateTrip, endDateTrip, targetPlace } from '../store/actions'
 
 const Container = styled.div`
+  opacity: 0.9;
   color: rgba(0, 0, 0, 0.87);
   background-color: white;
   transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
@@ -48,6 +49,10 @@ class Home extends Component {
     return (
       <Fragment>
         <div className="homeContainer">
+          <div className="slogansPosition">
+            <h1 className="slogans">Travel is the only thing you buy</h1>
+            <h1 className="slogans">that makes you rich :)</h1>
+          </div>
           <video id="background-video" loop autoPlay>
            <source src={Video} type="video/mp4" />
            <source src={Video} type="video/ogg" />
