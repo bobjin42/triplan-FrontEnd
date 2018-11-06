@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Card, Image, Button, Modal, List } from 'semantic-ui-react'
 import { addToSelectedPois, removeFromPois } from '../store/actions'
+import { getTargetId } from '../store/actions'
 
 class PlaceDetail extends Component {
 
@@ -10,7 +11,7 @@ state = {
 }
 
 handleClick = () => {
-  this.props.targerDetailPlace(this.props.id)
+  this.props.dispatch(getTargetId(this.props.id))
 }
 
 handleClickAdd = () => {
@@ -79,5 +80,11 @@ handleClickRemove = () => {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    detailPlace: state.placeReducer.detailPlace[0].data.place
+  }
+}
 
-export default connect()(PlaceDetail);
+
+export default connect(mapStateToProps, null)(PlaceDetail);

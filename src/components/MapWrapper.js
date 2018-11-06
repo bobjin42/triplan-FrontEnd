@@ -29,7 +29,7 @@ class MapWrapper extends Component {
       iconUrl: require('../icon/download.png'),
       iconSize: [40,40]
     }), L.icon({
-      iconUrl: require('../icon/number-4-icon-1.png'),
+      iconUrl: require('../icon/Location_Detailed-3-512.png'),
       iconSize: [40,40]
     })
     ]
@@ -57,8 +57,8 @@ class MapWrapper extends Component {
 
 function mapStateToProps(state) {
   return{
-    schedualPlaces: state.schedualPlaces,
-    places: state.places
+    schedualPlaces: state.placeReducer.schedualPlaces,
+    places: state.placeReducer.places
   }
 }
 

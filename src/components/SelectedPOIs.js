@@ -146,7 +146,7 @@ class SelectedPOIs extends Component {
 
 function mapStateToProps(state) {
   return {
-    selectedPlaces: state.selectedPlaces
+    selectedPlaces: state.placeReducer.selectedPlaces
   }
 }
 

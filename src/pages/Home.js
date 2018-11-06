@@ -5,6 +5,8 @@ import { Icon, Input, Modal } from 'semantic-ui-react'
 import { DateRange } from 'react-date-range';
 import { format } from 'date-fns'
 import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
+import { startDateTrip, endDateTrip, targetPlace } from '../store/actions'
 
 const Container = styled.div`
   color: rgba(0, 0, 0, 0.87);
@@ -25,19 +27,13 @@ const Container = styled.div`
 
 class Home extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      startDate: "",
-      endDate: ""
-    };
+  handleSelect = (range) => {
+    this.props.updateStartDate(format(range.startDate._d, 'MM/DD/YYYY'))
+    this.props.updateEndDate(format(range.endDate._d, 'MM/DD/YYYY'))
   }
 
-  handleSelect = (range) => {
-    this.setState({
-      startDate: format(range.startDate._d, 'MM/DD/YYYY'),
-      endDate: format(range.endDate._d, 'MM/DD/YYYY')
-    })
+  handleClick = (e) => {
+    this.props.updateTargetPlace(e.target.value)
   }
 
   goToShow = () => {
@@ -45,6 +41,7 @@ class Home extends Component {
   }
 
   render() {
+    console.log(this.state);
     const video = {
       src: '../icon/Untitled.mp4'
     }
@@ -57,9 +54,9 @@ class Home extends Component {
           </video>
           <div>
             <Container className="searchContainer">
-              <Input icon='plane' iconPosition='left' placeholder='Search places...' />
+              <Input onChange={this.handleClick} icon='plane' iconPosition='left' placeholder='Search places...' value={this.props.targetPlace} />
               <Modal trigger={<Input icon={<Icon name='search' inverted circular link onClick={this.goToShow}/>} placeholder='Search...'
-                value={this.state.startDate && this.state.endDate !== "" ? this.state.startDate + " ~ " + this.state.endDate : ""}
+                value={this.props.startDateTrip && this.props.endDateTrip ? this.props.startDateTrip + " ~ " + this.props.endDateTrip : ""}
                 />
               }>
                 <DateRange
@@ -73,7 +70,29 @@ class Home extends Component {
       </Fragment>
     );
   }
-
 }
 
-export default withRouter(Home);
+function mapStateToProps(state) {
+  return{
+    startDateTrip: state.tripReducer.startDate,
+    endDateTrip: state.tripReducer.endDate,
+    targetPlace: state.tripReducer.targetPlace
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    updateStartDate: (date) => {
+      dispatch(startDateTrip(date))
+    },
+    updateEndDate: (date) => {
+      dispatch(endDateTrip(date))
+    },
+    updateTargetPlace: (place) => {
+      dispatch(targetPlace(place))
+    }
+  }
+}
+
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));
