@@ -21,11 +21,10 @@ code {
 }
 
 .btn {
-  /* position:absolute; */
-  margin-left: auto;
-  margin-right: auto;
-  bottom: 5%;
-  padding-top: 3px;
+  position:relative;
+  margin-left: 50%;
+  margin-right: 50%;
+  bottom: 0;
 }
 
 .homeContainer {
@@ -75,6 +74,28 @@ code {
     -webkit-overflow-scrolling: touch;
 }
 
-.datePicker {
+.card {
+  position: absolute;
+}
 
+.timeSelect {
+  padding-left: 4px;
+  padding-right: 6px;
+}
+
+.cityDetailImg {
+  float: left;
+  overflow: auto;
+  padding-right: 8px;
+  padding-top: 4px;
+}
+
+.cityLabel {
+  padding-right: 18px;
+  padding-left: 18px;
+}
+
+.citydetailHeader {
+  font-weight: bold;
+  text-decoration: underline
 }

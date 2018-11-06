@@ -20,7 +20,7 @@ import OverflowScrolling from 'react-overflow-scrolling';
   const TaskList = styled.div`
     padding: 8px;
     transition: background-color 0.2s ease;
-    background-color:${props => (props.isDraggingOver ? 'white' : 'white')};
+    background-color:${props => (props.isDraggingOver ? 'lightgrey' : 'white')};
     flex-grow: 1;
     min-height: 100px;
   `;
@@ -31,18 +31,18 @@ import OverflowScrolling from 'react-overflow-scrolling';
         <Container>
           <Title>{this.props.calender.title}</Title>
           <OverflowScrolling className='overflow-scrolling'>
-          <Droppable droppableId={this.props.calender.id}>
-          {(provided, snapshot) => (
-            <TaskList
-              ref={provided.innerRef}
-              isDraggingOver={snapshot.isDraggingOver}
-              {...provided.droppableProps}
-            >
-            {this.props.schedual.map((task, index) => <Poi key={task.id} task={task} index={index}/>)}
-            {provided.placeholder}
-            </TaskList>
-          )}
-          </Droppable>
+            <Droppable droppableId={this.props.calender.id}>
+            {(provided, snapshot) => (
+              <TaskList
+                ref={provided.innerRef}
+                isDraggingOver={snapshot.isDraggingOver}
+                {...provided.droppableProps}
+              >
+              {this.props.schedual.map((task, index) => <Poi key={task.id} task={task} index={index}/>)}
+              {provided.placeholder}
+              </TaskList>
+            )}
+            </Droppable>
           </OverflowScrolling>
         </Container>
       );

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PlaceDetail from './PlaceDetail';
-import { Card, Tab, Button, Label } from 'semantic-ui-react';
+import { Card, Tab, Button, Label, Item, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux'
 import styled from 'styled-components';
 import { addPlaces } from '../store/actions';
@@ -14,7 +14,8 @@ class Show extends Component {
 
   state = {
     detailPlace: [],
-    targetId: ""
+    targetId: "",
+    detailCity: []
   }
 
 componentDidMount() {
@@ -30,6 +31,13 @@ componentDidMount() {
       detailPlace: data
     })
   })
+  fetch('http://localhost:5001/city')
+  .then(res => res.json())
+  .then(data => {
+    this.setState({
+      detailCity: data
+    })
+  })
 }
 
 goToPlan = () => {
@@ -43,14 +51,46 @@ targerDetailPlace = (id) => {
 }
 
   render() {
-    console.log(this.state.detailPlace);
     const panes = [
-      { menuItem: 'City Detail', render: () => <Tab.Pane>Tab 1 Content</Tab.Pane> },
-      { menuItem: 'POIs for planging', render: () => <Tab.Pane>
+      { menuItem: {content:'City Detail', icon: "book"}, render: () => <Tab.Pane>
+      {this.state.detailCity[0]  ?
+        <Fragment>
+          <Item>
+            <Item.Image className="cityDetailImg" size='tiny' src={this.state.detailCity[0].data.place.main_media.media[0].url}/>
+            <Item.Content verticalAlign='middle'>
+            <Item.Header as="h3" className="citydetailHeader">{this.state.detailCity[0].data.place.name}</Item.Header>
+            <Item.Description>
+              <p>{this.state.detailCity[0].data.place.description.text}</p>
+            </Item.Description>
+            </Item.Content>
+          </Item>
+          <Item.Extra>
+            <Label size="small" className="cityLabel">
+              <Icon name='internet explorer'/>
+              <a href={this.state.detailCity[0].data.place.references[1].url} target="_blank" rel="noopener noreferrer"> Offical Page </a>
+            </Label>
+            <Label size="small" className="cityLabel">
+              <Icon name='wikipedia w'/>
+              <a href={this.state.detailCity[0].data.place.references[0].url} target="_blank" rel="noopener noreferrer"> Wikipedia Page </a>
+            </Label>
+            <Label size="small" className="cityLabel">
+              <Icon name='bookmark'/>
+              <a href={this.state.detailCity[0].data.place.references[2].url} target="_blank" rel="noopener noreferrer"> Tour Guide Page </a>
+            </Label>
+            <Label size="small" className="cityLabel">
+              <Icon name='subway'/>
+              <a href={this.state.detailCity[0].data.place.references[3].url} target="_blank" rel="noopener noreferrer"> Subway Map </a>
+            </Label>
+
+          </Item.Extra>
+        </Fragment>
+      : null}
+      </Tab.Pane> },
+      { menuItem: {content:'POIs', icon: "heart"}, render: () => <Tab.Pane>
         {this.props.selectedPlaces.map(place => <Label color='teal' tag key={place.id}>{place.name}</Label>)}
         {this.props.selectedPlaces.length === 0 ? null : <Button className="selectedpois_btn" secondary size="tiny" onClick={this.goToPlan}>Go to plan</Button>}</Tab.Pane>
       },
-      { menuItem: 'Shared plans', render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
+      { menuItem: {content:'Shared plans', icon:"share square"}, render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
     ]
     return(
       <Container>

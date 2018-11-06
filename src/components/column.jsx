@@ -34,18 +34,18 @@ class Column extends Component {
       <Container>
         <Title>{this.props.column.title}</Title>
         <OverflowScrolling className='overflow-scrolling'>
-        <Droppable droppableId={this.props.column.id}>
-        {(provided, snapshot) => (
-          <TaskList
-            ref={provided.innerRef}
-            isDraggingOver={snapshot.isDraggingOver}
-            {...provided.droppableProps}
-          >
-          {this.props.tasks.map((task, index) => <Poi key={task.id} task={task} index={index}/>)}
-          {provided.placeholder}
-          </TaskList>
-        )}
-        </Droppable>
+          <Droppable droppableId={this.props.column.id}>
+          {(provided, snapshot) => (
+            <TaskList
+              ref={provided.innerRef}
+              isDraggingOver={snapshot.isDraggingOver}
+              {...provided.droppableProps}
+            >
+            {this.props.tasks.map((task, index) => <Poi key={task.id} task={task} index={index}/>)}
+            {provided.placeholder}
+            </TaskList>
+          )}
+          </Droppable>
         </OverflowScrolling>
       </Container>
     );
