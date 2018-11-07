@@ -38,7 +38,7 @@ code {
 }
 
 .searchContainer {
-  position:  absolute;
+  position: absolute;
   right: 10%;
   top: 40%;
 }
@@ -101,7 +101,7 @@ code {
   z-index: 1;
   color: white;
   text-align: left;
-  font-size: 400%;
+  font-size: 35px;
   letter-spacing: 3px
 }
 
@@ -109,4 +109,9 @@ code {
   position: absolute;
   margin-left: 8%;
   bottom: 40%;
+}
+
+.navbar {
+  position: absolute;
+  z-index: 1;
 }

@@ -6,7 +6,7 @@ import { DateRange } from 'react-date-range';
 import { format } from 'date-fns'
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { startDateTrip, endDateTrip, targetPlace } from '../store/actions'
+import { startDateTrip, endDateTrip, targetPlace, createTrip } from '../store/actions'
 
 const Container = styled.div`
   opacity: 0.9;
@@ -38,11 +38,11 @@ class Home extends Component {
   }
 
   goToShow = () => {
+    this.props.createTripInfo(this.props.user.id, this.props.startDateTrip, this.props.endDateTrip)
     this.props.history.push('/show')
   }
 
   render() {
-    console.log(this.state);
     const video = {
       src: '../icon/Untitled.mp4'
     }
@@ -79,9 +79,10 @@ class Home extends Component {
 
 function mapStateToProps(state) {
   return{
+    user: state.usersReducer.user,
     startDateTrip: state.tripReducer.startDate,
     endDateTrip: state.tripReducer.endDate,
-    targetPlace: state.tripReducer.targetPlace
+    targetPlace: state.tripReducer.targetPlace,
   }
 }
 
@@ -95,6 +96,9 @@ function mapDispatchToProps(dispatch) {
     },
     updateTargetPlace: (place) => {
       dispatch(targetPlace(place))
+    },
+    createTripInfo: (user_id, start_date, end_date) => {
+      dispatch(createTrip(user_id, start_date, end_date))
     }
   }
 }

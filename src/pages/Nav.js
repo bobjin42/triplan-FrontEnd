@@ -1,33 +1,53 @@
-import React, { Component } from 'react';
-import { Menu, Segment } from 'semantic-ui-react'
+import React, { Component, Fragment } from 'react';
+import { Menu, Segment, Button } from 'semantic-ui-react'
+import { withRouter, NavLink } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { fetchCurrentUser, logout } from '../store/actions'
 
 class Nav extends Component {
 
-  state = { activeItem: 'home' }
+  componentDidMount() {
+    if (localStorage.getItem('jwt')&&!this.props.user.loggedIn) {
+      this.props.fetchCurrentUser()
+    }
+  }
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleOut = () => {
+    localStorage.clear()
+    this.props.history.push("/login")
+    this.props.logout()
+  }
+
 
   render() {
-    const { activeItem } = this.state
+    const { user: { loggedIn, user }, location: { pathname } } = this.props
     return (
-      <Segment inverted>
-        <Menu inverted pointing secondary>
-          <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
-          <Menu.Item
-            name='messages'
-            active={activeItem === 'messages'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name='friends'
-            active={activeItem === 'friends'}
-            onClick={this.handleItemClick}
-          />
+      <Segment inverted className="navbar">
+        <Menu size="small" inverted pointing secondary >
+        {loggedIn ? (
+          <Fragment>
+            <Menu.Item as={NavLink} to='/' name='Home' active={pathname === '/'} />
+            <Menu.Item as={NavLink} to='/profile' name='Profile' active={pathname === '/profile'}/>
+            <Menu.Menu position="right">
+            <Menu.Item>Hi {this.props.user.user.name}</Menu.Item>
+            <Menu.Item><Button onClick={this.handleOut}>Logout</Button></Menu.Item>
+            </Menu.Menu>
+          </Fragment>
+        ) : (
+          <Fragment>
+            <Menu.Menu position="right">
+              <Menu.Item as={NavLink} to="/login" name="Login" active={pathname === '/login'} />
+              <Menu.Item as={NavLink} to="/signup" name="Signup" active={pathname === '/signup'} />
+            </Menu.Menu>
+          </Fragment>
+        )}
         </Menu>
       </Segment>
-    );
+    )
   }
 
 }
 
-export default Nav;
+const mapStateToProps = ({ usersReducer: user }) => ({ user })
+
+export default withRouter(connect(mapStateToProps, {fetchCurrentUser, logout})(Nav));

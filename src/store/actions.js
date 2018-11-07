@@ -1,5 +1,6 @@
 import { ADD_PLACES, ADD_TO_SELECTEDPOIS, REMOVE_FROM_SELECTEDPOIS, SCHEDUAL_PLACES,
-  UPDATE_TARGETPLACE, START_DATE, END_DATE, CITY_DETAIL, POIS_DETAIL, GET_TARGET_ID } from './actionTypes'
+  UPDATE_TARGETPLACE, START_DATE, END_DATE, CITY_DETAIL, POIS_DETAIL, GET_TARGET_ID,
+  SET_CURRENT_USER, AUTHENTICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN, LOG_OUT } from './actionTypes'
 
 export const addPlaces = (places) => ({
   type: ADD_PLACES,
@@ -51,11 +52,27 @@ export const getTargetId = (id) => ({
   payload: id
 })
 
+export const setCurrentUser = (userData) => ({
+  type: 'SET_CURRENT_USER',
+  payload: userData
+})
+
+export const failedLogin = (errorMsg) => ({
+  type: 'FAILED_LOGIN',
+  payload: errorMsg
+})
+
+export const logout = () => ({
+  type: "LOG_OUT"
+})
+
 export const fetchPlaces = () => {
   return (dispatch) => {
     fetch("http://localhost:3001/api/v1/locations")
     .then(res => res.json())
-    .then(places => dispatch(addPlaces(places)))
+    .then(places => {
+      dispatch(addPlaces(places))
+    })
   }
 }
 
@@ -74,3 +91,100 @@ export const fetchPOIsDetail = () => {
     .then(data => dispatch(poisDetail(data)))
   }
 }
+
+export const createTrip = (user_id, start_date, end_date) => {
+  return (dispatch) => {
+    fetch('http://localhost:3001/api/v1/trips', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({
+        trip: {
+          user_id: user_id,
+          start_date: start_date,
+          end_date: end_date
+        }
+      })
+    })
+  }
+}
+
+export const loginUser = (username, password) => {
+  return (dispatch) => {
+    dispatch(authenticatingUser())
+    fetch('http://localhost:3001/api/v1/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({
+        user: {
+          username: username,
+          password: password
+        }
+      })
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        } else {
+          throw response
+        }
+      })
+      .then(JSONResponse => {
+        localStorage.setItem('jwt', JSONResponse.jwt)
+        dispatch(setCurrentUser(JSONResponse.user))
+      })
+  }
+}
+
+export const fetchCurrentUser = () => {
+  return (dispatch) => {
+    dispatch(authenticatingUser())
+    fetch('http://localhost:3001/api/v1/profile', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`
+      }
+    })
+      .then(response => response.json())
+      .then((JSONResponse) => dispatch(setCurrentUser(JSONResponse.user)))
+  }
+}
+
+export const signupUser = (username, password, name, email_address) => {
+  return (dispatch) => {
+    fetch('http://localhost:3001/api/v1/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({
+        user: {
+          username: username,
+          password: password,
+          name: name,
+          email_address: email_address
+        }
+      })
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        } else {
+          throw response
+        }
+      })
+      .then(JSONResponse => {
+        localStorage.setItem('jwt', JSONResponse.jwt)
+        dispatch(setCurrentUser(JSONResponse.user))
+      })
+      .catch(r => r.json().then(e => dispatch({ type: 'FAILED_LOGIN', payload: e.message })))
+  }
+}
+
+export const authenticatingUser = () => ({ type: 'AUTHENTICATING_USER' })
