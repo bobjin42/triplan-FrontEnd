@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Nav from './pages/Nav';
 import Profile from './pages/Profile';
 import Signup from './pages/Signup';
+import TimePlan from './pages/TimePlan';
 
 class App extends Component {
 
@@ -22,6 +23,7 @@ class App extends Component {
           <Route exact path="/plan" component={Plan} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
+          <Route exact path="/timeplan" component={TimePlan} />
         </Switch>
       </Fragment>
     );

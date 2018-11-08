@@ -115,3 +115,13 @@ code {
   position: absolute;
   z-index: 1;
 }
+
+.timeplantable {
+  padding-left: 20px;
+  padding-right: 10px;
+  padding-top: 5px;
+}
+
+.tableimg {
+  float: right;
+}

@@ -3,11 +3,13 @@ import thunk from 'redux-thunk'
 import placeReducer from './reducer/placeReducer';
 import tripReducer from './reducer/tripReducer';
 import usersReducer from './reducer/usersReducer';
+import planReducer from './reducer/planReducer';
 
 const rootReducer = combineReducers({
   placeReducer,
   tripReducer,
-  usersReducer
+  usersReducer,
+  planReducer
 })
 
 const composeEnhancers =  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?

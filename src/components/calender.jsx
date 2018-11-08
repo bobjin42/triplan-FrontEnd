@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
 import Poi from './poi';
 import { Droppable } from 'react-beautiful-dnd';
-import OverflowScrolling from 'react-overflow-scrolling';
+import { Button, Icon } from 'semantic-ui-react';
+import { withRouter } from 'react-router'
 
   const Container = styled.div`
     margin: 8px;
@@ -26,27 +27,32 @@ import OverflowScrolling from 'react-overflow-scrolling';
   `;
 
   class Calender extends Component {
+
+    goToTimePlan = () => {
+      this.props.history.push('/timeplan')
+    }
+
     render() {
       return (
-        <Container>
-          <Title>{this.props.calender.title}</Title>
-          <OverflowScrolling className='overflow-scrolling'>
-            <Droppable droppableId={this.props.calender.id}>
-            {(provided, snapshot) => (
-              <TaskList
-                ref={provided.innerRef}
-                isDraggingOver={snapshot.isDraggingOver}
-                {...provided.droppableProps}
-              >
-              {this.props.schedual.map((task, index) => <Poi key={task.id} task={task} index={index}/>)}
-              {provided.placeholder}
-              </TaskList>
-            )}
-            </Droppable>
-          </OverflowScrolling>
-        </Container>
+        <Fragment>
+          <Container>
+            <Title>{this.props.calender.title}<Button onClick={this.goToTimePlan} basic floated='right'>Start Time Planer</Button></Title>
+              <Droppable droppableId={this.props.calender.id}>
+                {(provided, snapshot) => (
+                  <TaskList
+                    ref={provided.innerRef}
+                    isDraggingOver={snapshot.isDraggingOver}
+                    {...provided.droppableProps}
+                    >
+                    {this.props.schedual.map((task, index) => <Poi key={task.id} task={task} index={index}/>)}
+                    {provided.placeholder}
+                  </TaskList>
+                )}
+              </Droppable>
+          </Container>
+        </Fragment>
       );
     }
   }
 
-export default Calender;
+export default withRouter(Calender);

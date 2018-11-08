@@ -1,6 +1,6 @@
 import { ADD_PLACES, ADD_TO_SELECTEDPOIS, REMOVE_FROM_SELECTEDPOIS, SCHEDUAL_PLACES,
   UPDATE_TARGETPLACE, START_DATE, END_DATE, CITY_DETAIL, POIS_DETAIL, GET_TARGET_ID,
-  SET_CURRENT_USER, AUTHENTICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN, LOG_OUT } from './actionTypes'
+  SET_CURRENT_USER, AUTHENTICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN, LOG_OUT, PLAN_DETAIL } from './actionTypes'
 
 export const addPlaces = (places) => ({
   type: ADD_PLACES,
@@ -53,17 +53,22 @@ export const getTargetId = (id) => ({
 })
 
 export const setCurrentUser = (userData) => ({
-  type: 'SET_CURRENT_USER',
+  type: SET_CURRENT_USER,
   payload: userData
 })
 
 export const failedLogin = (errorMsg) => ({
-  type: 'FAILED_LOGIN',
+  type: FAILED_LOGIN,
   payload: errorMsg
 })
 
 export const logout = () => ({
-  type: "LOG_OUT"
+  type: LOG_OUT
+})
+
+export const planDetail = (detail) => ({
+  type: PLAN_DETAIL,
+  payload: detail
 })
 
 export const fetchPlaces = () => {
