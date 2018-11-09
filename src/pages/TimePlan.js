@@ -5,43 +5,8 @@ import TimePlanRow from './TimePlanRow'
 
 class TimePlan extends Component {
 
-  state = {
-    planDetail:[]
-  }
+  handleSubmit = () => {
 
-
-  handlePlaninfo = (data) => {
-    const newPlanDetail = [...this.state.planDetail];
-      newPlanDetail.find(plan => {
-        if (plan.id == data.id) {
-          plan = data
-          this.setState({
-            planDetail: newPlanDetail
-          })
-        } else {
-          this.setState({
-            planDetail: [newPlanDetail, data]
-          })
-        }
-      })
-      // let newState = [...this.state.planDetail]
-      // let plan = newState.find(plan => plan.id == data.id)
-      // // console.log("plan ", plan);
-      // // console.log("plan ", plan);
-      // if(plan){
-      //   plan = data
-      //   this.setState({
-      //     planDetail: newState
-      //   })
-      // } else {
-      //   this.setState({
-      //     planDetail: [...this.state.planDetail, data]
-      //   })
-      // }
-    }
-
-  handleSubmit = (e) => {
-    // console.log(this.state);
   }
 
   render() {
@@ -65,7 +30,7 @@ class TimePlan extends Component {
           </Table.Header>
           <Table.Body>
             {placesInstance.map(place => {
-              return <TimePlanRow handlePlaninfo={this.handlePlaninfo} place={place} key={place.id} id={place.api_id} />
+              return <TimePlanRow place={place} key={place.id} id={place.api_id} />
             })}
           </Table.Body>
         </Table>

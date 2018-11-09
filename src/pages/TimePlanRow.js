@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Table, TextArea, Input, Header, Image } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { planDetail, pushPlanDetail } from '../store/actions';
 
 class TimePlanRow extends Component {
 
@@ -18,10 +20,18 @@ class TimePlanRow extends Component {
     })
   }
 
+  updatePlan = () => {
+    if (this.props.plan.find(plan => plan.id == this.state.id)){
+      this.props.planDetail(this.state)
+    } else {
+      this.props.pushPlanDetail(this.state)
+    }
+  }
+
   handleChange = (e, data) => {
     this.setState({
       [data.name]: data.value
-    }, () => this.props.handlePlaninfo(this.state))  
+    }, this.updatePlan)
   }
 
   render() {
@@ -47,4 +57,11 @@ class TimePlanRow extends Component {
   }
 }
 
-export default TimePlanRow;
+function mapStateToProps(state) {
+  console.log("state.planReducer:",state.planReducer)
+  return {
+    plan: state.planReducer.plan
+  }
+}
+
+export default connect(mapStateToProps, { planDetail, pushPlanDetail })(TimePlanRow)

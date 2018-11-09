@@ -14,3 +14,4 @@ export const AUTHENTICATED_USER = "authenticated_user"
 export const FAILED_LOGIN = 'failed_login'
 export const LOG_OUT = 'log_out'
 export const PLAN_DETAIL = 'plan_detail'
+export const PUSH_PLAN_DETAIL = 'push_plan_detail'

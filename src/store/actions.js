@@ -1,6 +1,6 @@
 import { ADD_PLACES, ADD_TO_SELECTEDPOIS, REMOVE_FROM_SELECTEDPOIS, SCHEDUAL_PLACES,
   UPDATE_TARGETPLACE, START_DATE, END_DATE, CITY_DETAIL, POIS_DETAIL, GET_TARGET_ID,
-  SET_CURRENT_USER, AUTHENTICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN, LOG_OUT, PLAN_DETAIL } from './actionTypes'
+  SET_CURRENT_USER, AUTHENTICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN, LOG_OUT, PLAN_DETAIL, PUSH_PLAN_DETAIL } from './actionTypes'
 
 export const addPlaces = (places) => ({
   type: ADD_PLACES,
@@ -68,6 +68,11 @@ export const logout = () => ({
 
 export const planDetail = (detail) => ({
   type: PLAN_DETAIL,
+  payload: detail
+})
+
+export const pushPlanDetail = (detail) => ({
+  type: PUSH_PLAN_DETAIL,
   payload: detail
 })
 
