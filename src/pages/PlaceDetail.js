@@ -28,7 +28,11 @@ handleClickRemove = () => {
     const { detailPlace } = this.props
     const modalDetail = () => {
       return <Modal trigger={<Button onClick={this.handleClick} className="ui labeled icon button"><i className="book icon"></i>Detail</Button>} centered={false}>
-        <Modal.Header>{detailPlace.name}</Modal.Header>
+        <Modal.Header>
+          {detailPlace.name}
+          {this.state.clicked ? <Button className="btn" floated='right' onClick={this.handleClickAdd} content='Add' /> :
+          <Button className="btn" floated='right' onClick={this.handleClickRemove} content='Remove' />}
+        </Modal.Header>
         <Modal.Content>
           <img className="modalImage" size='large' alt="" src={detailPlace.main_media.media[0].url} />
         <Modal.Description className="detailDescription">

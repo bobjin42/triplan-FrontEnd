@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import styled from 'styled-components'
 import Video from '../icon/Untitled.mp4'
-import { Icon, Input, Modal } from 'semantic-ui-react'
+import { Icon, Input, Modal, Button } from 'semantic-ui-react'
 import { DateRange } from 'react-date-range';
 import { format } from 'date-fns'
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { startDateTrip, endDateTrip, targetPlace, createTrip } from '../store/actions'
+import { startDateTrip, endDateTrip, targetPlaceUpdate, createTrip } from '../store/actions'
 
 const Container = styled.div`
   opacity: 0.9;
@@ -29,16 +29,16 @@ const Container = styled.div`
 class Home extends Component {
 
   handleSelect = (range) => {
-    this.props.updateStartDate(format(range.startDate._d, 'MM/DD/YYYY'))
-    this.props.updateEndDate(format(range.endDate._d, 'MM/DD/YYYY'))
+    this.props.updateStartDate(format(range.startDate._d, 'YYYY/MM/DD'))
+    this.props.updateEndDate(format(range.endDate._d, 'YYYY/MM/DD'))
   }
 
-  handleClick = (e) => {
+  handleChange = (e) => {
     this.props.updateTargetPlace(e.target.value)
   }
 
   goToShow = () => {
-    this.props.createTripInfo(this.props.user.id, this.props.startDateTrip, this.props.endDateTrip)
+    this.props.createTripInfo(this.props.user.id, this.props.targetPlace, this.props.startDateTrip, this.props.endDateTrip)
     this.props.history.push('/show')
   }
 
@@ -59,16 +59,15 @@ class Home extends Component {
           </video>
           <div>
             <Container className="searchContainer">
-              <Input onChange={this.handleClick} icon='plane' iconPosition='left' placeholder='Search places...' value={this.props.targetPlace} />
-              <Modal trigger={<Input icon={<Icon name='search' inverted circular link onClick={this.goToShow}/>} placeholder='Search...'
-                value={this.props.startDateTrip && this.props.endDateTrip ? this.props.startDateTrip + " ~ " + this.props.endDateTrip : ""}
-                />
-              }>
+              <Input onChange={this.handleChange} icon='plane' iconPosition='left' placeholder='Search places...' value={this.props.targetPlace} />
+              <Modal trigger={<Input icon="calendar alternate outline" iconPosition='left' placeholder='Select your travel date ...'
+                value={this.props.startDateTrip && this.props.endDateTrip ? this.props.startDateTrip + " ~ " + this.props.endDateTrip : ""}/>}>
                 <DateRange
                   onInit={this.handleSelect}
                   onChange={this.handleSelect}
                   />
               </Modal>
+              <Button onClick={this.goToShow} attached='bottom'>Start My Journey</Button>
             </Container>
           </div>
         </div>
@@ -95,10 +94,10 @@ function mapDispatchToProps(dispatch) {
       dispatch(endDateTrip(date))
     },
     updateTargetPlace: (place) => {
-      dispatch(targetPlace(place))
+      dispatch(targetPlaceUpdate(place))
     },
-    createTripInfo: (user_id, start_date, end_date) => {
-      dispatch(createTrip(user_id, start_date, end_date))
+    createTripInfo: (user_id, trip_title, start_date, end_date) => {
+      dispatch(createTrip(user_id, trip_title, start_date, end_date))
     }
   }
 }

@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import Poi from './poi';
 import { Droppable } from 'react-beautiful-dnd';
 import { Button, Icon } from 'semantic-ui-react';
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
+import { createPlan } from '../store/actions'
 
   const Container = styled.div`
     margin: 8px;
@@ -30,6 +32,9 @@ import { withRouter } from 'react-router'
 
     goToTimePlan = () => {
       this.props.history.push('/timeplan')
+      this.props.schedualPlaces.forEach(placeId => {
+        this.props.createPlan(this.props.tripId, this.props.places.find(place => place.api_id == placeId).id)
+      })
     }
 
     render() {
@@ -55,4 +60,12 @@ import { withRouter } from 'react-router'
     }
   }
 
-export default withRouter(Calender);
+  function mapStateToProps(state) {
+    return{
+      schedualPlaces: state.placeReducer.schedualPlaces,
+      tripId: state.placeReducer.tripId,
+      places: state.placeReducer.places
+    }
+  }
+
+export default withRouter(connect(mapStateToProps, {createPlan})(Calender));

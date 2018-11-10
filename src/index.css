@@ -125,3 +125,14 @@ code {
 .tableimg {
   float: right;
 }
+
+.detailbtn {
+  position: absolute;
+  bottom: 0
+}
+
+.profile_card {
+  position: absolute;
+  padding-left: 20px;
+  padding-top: 10px;
+}

@@ -3,7 +3,7 @@ import PlaceDetail from './PlaceDetail';
 import { Card, Tab, Button, Label, Item, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { fetchPlaces, fetchCityDetail, fetchPOIsDetail } from '../store/actions';
+import { fetchPlaces, fetchCityDetail, fetchPOIsDetail, fetchTripId } from '../store/actions';
 import { withRouter } from 'react-router';
 
 const Container = styled.div`
@@ -19,6 +19,7 @@ componentDidMount(){
 }
 
 goToPlan = () => {
+  this.props.dispatch(fetchTripId())
   this.props.history.push('/plan')
 }
 

@@ -20,7 +20,7 @@ class Nav extends Component {
 
 
   render() {
-    const { user: { loggedIn, user }, location: { pathname } } = this.props
+    const { user: { loggedIn }, location: { pathname } } = this.props
     return (
       <Segment inverted className="navbar">
         <Menu size="small" inverted pointing secondary >
@@ -30,7 +30,7 @@ class Nav extends Component {
             <Menu.Item as={NavLink} to='/show' name='Show' active={pathname === '/show'} />
             <Menu.Item as={NavLink} to='/plan' name='Plan' active={pathname === '/plan'}/>
             <Menu.Menu position="right">
-            <Menu.Item as={NavLink} to='/profile' active={pathname === '/profile'}>Hi {this.props.user.user.name}</Menu.Item>
+            <Menu.Item as={NavLink} to='/profile' active={pathname === '/profile'}>{this.props.user.user ? `Hi ${this.props.user.user.name}` : null}</Menu.Item>
             <Menu.Item><Button onClick={this.handleOut}>Logout</Button></Menu.Item>
             </Menu.Menu>
           </Fragment>

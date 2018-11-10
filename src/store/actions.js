@@ -1,6 +1,7 @@
 import { ADD_PLACES, ADD_TO_SELECTEDPOIS, REMOVE_FROM_SELECTEDPOIS, SCHEDUAL_PLACES,
   UPDATE_TARGETPLACE, START_DATE, END_DATE, CITY_DETAIL, POIS_DETAIL, GET_TARGET_ID,
-  SET_CURRENT_USER, AUTHENTICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN, LOG_OUT, PLAN_DETAIL, PUSH_PLAN_DETAIL } from './actionTypes'
+  SET_CURRENT_USER, AUTHENTICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN, LOG_OUT, PLAN_DETAIL,
+  PUSH_PLAN_DETAIL, UPDATE_TRIP_ID, ADD_PLAN } from './actionTypes'
 
 export const addPlaces = (places) => ({
   type: ADD_PLACES,
@@ -22,7 +23,7 @@ export const schedualedPlace = (data) => ({
   payload: data
 })
 
-export const targetPlace = (data) => ({
+export const targetPlaceUpdate = (data) => ({
   type: UPDATE_TARGETPLACE,
   payload: data
 })
@@ -76,6 +77,26 @@ export const pushPlanDetail = (detail) => ({
   payload: detail
 })
 
+export const updateTripId = (tripId) => ({
+  type: UPDATE_TRIP_ID,
+  payload: tripId
+})
+
+export const addPlan = (planIns) => ({
+  type: ADD_PLAN,
+  payload: planIns
+})
+
+export const fetchTripId = () => {
+  return (dispatch) => {
+    fetch("http://localhost:3001/api/v1/trips")
+    .then(res => res.json())
+    .then(trip => {
+      dispatch(updateTripId(trip[trip.length -1].id))
+    })
+  }
+}
+
 export const fetchPlaces = () => {
   return (dispatch) => {
     fetch("http://localhost:3001/api/v1/locations")
@@ -102,7 +123,22 @@ export const fetchPOIsDetail = () => {
   }
 }
 
-export const createTrip = (user_id, start_date, end_date) => {
+export const updatePlan = (plan) => {
+  return (dispatch) => {
+    fetch('http://localhost:3001/api/v1/batch_update', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        plan
+      })
+    })
+  }
+}
+
+export const createTrip = (user_id, trip_title, start_date, end_date) => {
   return (dispatch) => {
     fetch('http://localhost:3001/api/v1/trips', {
       method: 'POST',
@@ -114,10 +150,31 @@ export const createTrip = (user_id, start_date, end_date) => {
         trip: {
           user_id: user_id,
           start_date: start_date,
-          end_date: end_date
+          end_date: end_date,
+          trip_title: trip_title
         }
       })
     })
+  }
+}
+
+export const createPlan = (trip_id, location_id) => {
+  return (dispatch) => {
+    fetch('http://localhost:3001/api/v1/plans', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({
+        plan: {
+          trip_id,
+          location_id,
+        }
+      })
+    })
+    .then(res => res.json())
+    .then(data => dispatch(addPlan(data)))
   }
 }
 

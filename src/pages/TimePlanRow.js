@@ -10,17 +10,21 @@ class TimePlanRow extends Component {
     end: "",
     notes: "",
     id: "",
-    name: ""
+    name: "",
+    tripId: "",
+    plan_id: "",
   }
 
   componentDidMount() {
     this.setState({
       id: this.props.id,
       name: this.props.place.name,
+      tripId: this.props.tripId,
+      plan_id: this.props.plan_id
     })
   }
 
-  updatePlan = () => {
+  updatePlanTime = () => {
     if (this.props.plan.find(plan => plan.id == this.state.id)){
       this.props.planDetail(this.state)
     } else {
@@ -31,11 +35,10 @@ class TimePlanRow extends Component {
   handleChange = (e, data) => {
     this.setState({
       [data.name]: data.value
-    }, this.updatePlan)
+    }, this.updatePlanTime)
   }
 
   render() {
-    console.log(this.state);
     return (
       <Table.Row>
         <Table.Cell>
@@ -58,9 +61,9 @@ class TimePlanRow extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log("state.planReducer:",state.planReducer)
   return {
-    plan: state.planReducer.plan
+    plan: state.planReducer.plan,
+    planIns: state.planReducer.planIns
   }
 }
 
