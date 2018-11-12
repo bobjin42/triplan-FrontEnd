@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import { Menu, Segment, Button } from 'semantic-ui-react'
+import { Menu, Segment, Button, Image } from 'semantic-ui-react'
 import { withRouter, NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchCurrentUser, logout } from '../store/actions'
+import { logo } from '../icon/logo.png'
 
 class Nav extends Component {
 
@@ -23,7 +24,7 @@ class Nav extends Component {
     const { user: { loggedIn }, location: { pathname } } = this.props
     return (
       <Segment inverted className="navbar">
-        <Menu size="small" inverted pointing secondary >
+        <Menu size="mini" inverted pointing secondary >
         {loggedIn ? (
           <Fragment>
             <Menu.Item as={NavLink} to='/' name='Home' active={pathname === '/'} />
@@ -32,6 +33,7 @@ class Nav extends Component {
             <Menu.Menu position="right">
             <Menu.Item as={NavLink} to='/profile' active={pathname === '/profile'}>{this.props.user.user ? `Hi ${this.props.user.user.name}` : null}</Menu.Item>
             <Menu.Item><Button onClick={this.handleOut}>Logout</Button></Menu.Item>
+            <Menu.Item><Image src={logo} className="logo"/></Menu.Item>
             </Menu.Menu>
           </Fragment>
         ) : (

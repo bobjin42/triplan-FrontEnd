@@ -6,6 +6,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: url(./icon/background.jpeg) no-repeat center center fixed;
+  background-size: auto;
 }
 
 code {
@@ -70,10 +72,6 @@ code {
     -webkit-overflow-scrolling: touch;
 }
 
-.card {
-  position: absolute;
-}
-
 .timeSelect {
   padding-left: 4px;
   padding-right: 6px;
@@ -114,6 +112,8 @@ code {
 .navbar {
   position: absolute;
   z-index: 1;
+  height: 60px;
+  margin-bottom: 0
 }
 
 .timeplantable {
@@ -127,12 +127,71 @@ code {
 }
 
 .detailbtn {
-  position: absolute;
-  bottom: 0
+  /* position: absolute; */
+  bottom: 0;
+  width: 95%;
 }
 
 .profile_card {
   position: absolute;
   padding-left: 20px;
   padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.travelPlan {
+  position: absolute;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.selectedpois_btn {
+  width: 40px;
+  margin: 3%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0
+}
+
+.labelpoi {
+  padding: 3px
+}
+
+.logo {
+  position: absolute;
+  z-index: 1
+}
+
+.card {
+  position: absolute;
+}
+
+.btngroup {
+  position: relative;
+}
+
+.loginInput {
+  width: 300px;
+}
+
+.loginForm {
+  position: absolute;
+  width: 60%;
+  left: 20%;
+}
+
+.loginbtn {
+  width: 100%
+}
+
+.planform {
+  position: absolute;
+  width: 90%;
+  left: 5%;
+}
+
+.opcailty {
+  opacity: 0.9
 }

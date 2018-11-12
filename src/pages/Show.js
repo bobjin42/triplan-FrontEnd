@@ -8,6 +8,7 @@ import { withRouter } from 'react-router';
 
 const Container = styled.div`
   padding: 10px;
+  background-color: white
 `;
 
 class Show extends Component {
@@ -31,6 +32,10 @@ targerDetailPlace = (id) => {
 
   render() {
     const panes = [
+      { menuItem: {content:'POIs', icon: "heart"}, render: () => <Tab.Pane>
+        {this.props.selectedPlaces.map(place => <span className="labelpoi"><Label image ><img src={place.thumbnail_url} />{place.name}</Label></span>)}
+        {this.props.selectedPlaces.length === 0 ? null : <Button icon='hand point right outline' className="selectedpois_btn" basic onClick={this.goToPlan}/>}</Tab.Pane>
+      },
       { menuItem: {content:'City Detail', icon: "book"}, render: () => <Tab.Pane>
       {this.props.detailCity[0]  ?
         <Fragment>
@@ -65,10 +70,6 @@ targerDetailPlace = (id) => {
         </Fragment>
       : null}
       </Tab.Pane> },
-      { menuItem: {content:'POIs', icon: "heart"}, render: () => <Tab.Pane>
-        {this.props.selectedPlaces.map(place => <Label color='teal' tag key={place.id}>{place.name}</Label>)}
-        {this.props.selectedPlaces.length === 0 ? null : <Button className="selectedpois_btn" secondary size="tiny" onClick={this.goToPlan}>Go to plan</Button>}</Tab.Pane>
-      },
       { menuItem: {content:'Shared plans', icon:"share square"}, render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
     ]
     return(

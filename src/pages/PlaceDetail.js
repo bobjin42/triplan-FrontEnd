@@ -66,15 +66,15 @@ handleClickRemove = () => {
         <Image src={this.props.place.thumbnail_url} />
         <Card.Content className="cardContent">
           <Card.Header>{this.props.place.name}</Card.Header>
-            <Card.Description>{this.props.place.perex}</Card.Description>
+            <Card.Description>{this.props.place.perex.split(" ").slice(0, 10).join(" ") + "..."}</Card.Description>
             {this.state.clicked ?
-              <Button.Group className="btn" basic color='blue' vertical labeled icon size="mini">
-                <Button className="btn" onClick={this.handleClickAdd} labelPosition='left' icon='paper plane outline' content='Add' />
+              <Button.Group className="btngroup" basic color='blue' vertical labeled icon size="mini">
+                <Button onClick={this.handleClickAdd} labelPosition='left' icon='paper plane outline' content='Add' />
                 {modalDetail()}
               </Button.Group>
                 :
-              <Button.Group className="btn" basic color='blue' vertical labeled icon size="mini">
-                <Button className="btn" onClick={this.handleClickRemove} labelPosition='left' icon='paper plane outline' content='Remove' />
+              <Button.Group className="btngroup" basic color='blue' vertical labeled icon size="mini">
+                <Button onClick={this.handleClickRemove} labelPosition='left' icon='paper plane outline' content='Remove' />
                 {modalDetail()}
               </Button.Group>
             }

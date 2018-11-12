@@ -1,12 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
-import { Card, Image } from 'semantic-ui-react'
+import { Card, Image, Accordion, Icon } from 'semantic-ui-react'
 import withAuth from '../hocs/withAuth'
+import TravelPlan from './TravelPlan';
+import { img } from '../icon/profile.jpeg'
 
 class Profile extends Component {
 
   state = {
-    usertravelPlan: []
+    usertravelPlan: [],
   }
 
   componentDidMount() {
@@ -20,7 +22,8 @@ class Profile extends Component {
   render() {
     const { name, username, email_address } = this.props
     return (
-      <Fragment>
+      <Fragment className="opcailty">
+        <img src={img} />
         <div className="profile_card">
           <Card >
             <Card.Content>
@@ -28,8 +31,8 @@ class Profile extends Component {
               <Card.Description>{email_address}</Card.Description>
             </Card.Content>
           </Card>
+          <TravelPlan travelPlans={this.state.usertravelPlan} />
         </div>
-
       </Fragment>
     );
   }

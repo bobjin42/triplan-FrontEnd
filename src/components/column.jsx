@@ -6,10 +6,11 @@ import OverflowScrolling from 'react-overflow-scrolling';
 
 const Container = styled.div`
   margin: 8px;
-  border: 1px solid lightgrey;
+  border: 4px solid lightgrey;
   border-radius: 2px;
   width: 350px;
   height: 700px;
+  background-color: white;
 
   display:flex;
   flex-direction: column;
@@ -25,7 +26,7 @@ const TaskList = styled.div`
   transition: background-color 0.2s ease;
   background-color:${props => (props.isDraggingOver ? 'skyblue' : 'white')};
   flex-grow: 1;
-  min-height: 100px;
+  min-height: 700px;
 `;
 
 class Column extends Component {
