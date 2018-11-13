@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import styled from 'styled-components'
 import Video from '../icon/Untitled.mp4'
-import { Icon, Input, Modal, Button } from 'semantic-ui-react'
+import { Icon, Input, Modal, Button, Label } from 'semantic-ui-react'
 import { DateRange } from 'react-date-range';
 import { format } from 'date-fns'
-import { withRouter } from 'react-router';
+import { withRouter, Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { startDateTrip, endDateTrip, targetPlaceUpdate, createTrip } from '../store/actions'
 
@@ -28,6 +28,10 @@ const Container = styled.div`
 
 class Home extends Component {
 
+  state = {
+    clicked: false
+  }
+
   handleSelect = (range) => {
     this.props.updateStartDate(format(range.startDate._d, 'YYYY/MM/DD'))
     this.props.updateEndDate(format(range.endDate._d, 'YYYY/MM/DD'))
@@ -38,8 +42,11 @@ class Home extends Component {
   }
 
   goToShow = () => {
+    this.setState({
+      clicked: !this.state.clicked
+    })
     this.props.createTripInfo(this.props.user.id, this.props.targetPlace, this.props.startDateTrip, this.props.endDateTrip)
-    this.props.history.push('/show')
+      this.props.history.push('./show')
   }
 
   render() {
@@ -60,6 +67,7 @@ class Home extends Component {
           <div>
             <Container className="searchContainer">
               <Input onChange={this.handleChange} icon='plane' iconPosition='left' placeholder='Search places...' value={this.props.targetPlace} />
+              {this.state.clicked && this.props.targetPlace === "" ?  <Label pointing>Please enter a destination</Label> : null}
               <Modal trigger={<Input icon="calendar alternate outline" iconPosition='left' placeholder='Select your travel date ...'
                 value={this.props.startDateTrip && this.props.endDateTrip ? this.props.startDateTrip + " ~ " + this.props.endDateTrip : ""}/>}>
                 <DateRange
@@ -82,6 +90,7 @@ function mapStateToProps(state) {
     startDateTrip: state.tripReducer.startDate,
     endDateTrip: state.tripReducer.endDate,
     targetPlace: state.tripReducer.targetPlace,
+    isLoading: state.placeReducer.isLoading
   }
 }
 

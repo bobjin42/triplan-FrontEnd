@@ -8,7 +8,8 @@ const defaultState = {
   detailPlace: [],
   targetDetailId: "",
   detailCity: [],
-  tripId: ""
+  tripId: "",
+  isLoading: true
 };
 
 
@@ -29,7 +30,7 @@ function placeReducer(state = defaultState, action) {
     case GET_TARGET_ID:
       return {...state, targetDetailId: action.payload};
     case UPDATE_TRIP_ID:
-      return {...state, tripId: action.payload}
+      return {...state, tripId: action.payload};
   default:
     return state;
   }

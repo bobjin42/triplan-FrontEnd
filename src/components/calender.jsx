@@ -12,7 +12,7 @@ import { createPlan } from '../store/actions'
     border: 4px solid lightgrey;
     border-radius: 1px;
     width: 350px;
-    height: 700px;
+    height: 650px;
     background-color: white
   `;
 

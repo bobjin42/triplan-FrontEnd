@@ -3,7 +3,7 @@ import PlaceDetail from './PlaceDetail';
 import { Card, Tab, Button, Label, Item, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { fetchPlaces, fetchCityDetail, fetchPOIsDetail, fetchTripId } from '../store/actions';
+import { fetchCityDetail, fetchTripId } from '../store/actions';
 import { withRouter } from 'react-router';
 
 const Container = styled.div`
@@ -14,8 +14,6 @@ const Container = styled.div`
 class Show extends Component {
 
 componentDidMount(){
-  this.props.dispatch(fetchPlaces())
-  this.props.dispatch(fetchPOIsDetail())
   this.props.dispatch(fetchCityDetail())
 }
 
@@ -24,17 +22,17 @@ goToPlan = () => {
   this.props.history.push('/plan')
 }
 
-targerDetailPlace = (id) => {
-  this.setState({
-    targetId: id
-  })
-}
+// targerDetailPlace = (id) => {
+//   this.setState({
+//     targetId: id
+//   })
+// }
 
   render() {
     const panes = [
       { menuItem: {content:'POIs', icon: "heart"}, render: () => <Tab.Pane>
-        {this.props.selectedPlaces.map(place => <span className="labelpoi"><Label image ><img src={place.thumbnail_url} />{place.name}</Label></span>)}
-        {this.props.selectedPlaces.length === 0 ? null : <Button icon='hand point right outline' className="selectedpois_btn" basic onClick={this.goToPlan}/>}</Tab.Pane>
+        {this.props.selectedPlaces.map(place => <span className="labelpoi" ><Label image ><img src={place.thumbnail_url} />{place.name}</Label></span>)}
+        {this.props.selectedPlaces.length === 0 ? null : <Button icon='hand point right outline' className="selectedpois_btn" secondary onClick={this.goToPlan}/>}</Tab.Pane>
       },
       { menuItem: {content:'City Detail', icon: "book"}, render: () => <Tab.Pane>
       {this.props.detailCity[0]  ?
@@ -73,7 +71,7 @@ targerDetailPlace = (id) => {
       { menuItem: {content:'Shared plans', icon:"share square"}, render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
     ]
     return(
-      <Container>
+      <Container style={{backgroundColor: "#E4E4E4"}}>
           <Tab panes={panes} />
         <Card.Group itemsPerRow={5}>
           {this.props.places.map(place => {
@@ -90,7 +88,8 @@ targerDetailPlace = (id) => {
       places: state.placeReducer.places,
       selectedPlaces: state.placeReducer.selectedPlaces,
       detailCity: state.placeReducer.detailCity,
-      detailPlace: state.placeReducer.detailPlace
+      detailPlace: state.placeReducer.detailPlace,
+      targetPlace: state.tripReducer.targetPlace
     }
   }
 

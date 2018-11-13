@@ -15,7 +15,7 @@ code {
     monospace;
 }
 
-#mapid { height: 118vh; width: 80vh  }
+#mapid { height: 650px; width: 490px  }
 
 .leaflet-container {
   height: 100%;
@@ -165,7 +165,13 @@ code {
 }
 
 .card {
+  position: relative;
+}
+
+.show-page-button-group {
   position: absolute;
+  bottom: 2%;
+  left: 25%;
 }
 
 .btngroup {
@@ -194,4 +200,17 @@ code {
 
 .opcailty {
   opacity: 0.9
+}
+
+.ui.segment:first-child {
+    margin-top: 0;
+    margin-bottom: 0
+}
+
+.ui.modal {
+    margin: 0;
+}
+
+.ui.card>.content>.description, .ui.cards>.card>.content>.description {
+  margin-bottom: 35%
 }

@@ -97,16 +97,6 @@ export const fetchTripId = () => {
   }
 }
 
-export const fetchPlaces = () => {
-  return (dispatch) => {
-    fetch("http://localhost:3001/api/v1/locations")
-    .then(res => res.json())
-    .then(places => {
-      dispatch(addPlaces(places))
-    })
-  }
-}
-
 export const fetchCityDetail = () => {
   return (dispatch) => {
     fetch('http://localhost:5001/city')
@@ -115,13 +105,13 @@ export const fetchCityDetail = () => {
   }
 }
 
-export const fetchPOIsDetail = () => {
-  return (dispatch) => {
-    fetch('http://localhost:5000/detail')
-    .then(res => res.json())
-    .then(data => dispatch(poisDetail(data)))
-  }
-}
+// export const fetchPOIsDetail = () => {
+//   return (dispatch) => {
+//     fetch('http://localhost:5000/detail')
+//     .then(res => res.json())
+//     .then(data => dispatch(poisDetail(data)))
+//   }
+// }
 
 export const updatePlan = (plan) => {
   return (dispatch) => {
@@ -154,6 +144,10 @@ export const createTrip = (user_id, trip_title, start_date, end_date) => {
           trip_title: trip_title
         }
       })
+    })
+    .then(res => res.json())
+    .then(places => {
+      dispatch(addPlaces(places))
     })
   }
 }
