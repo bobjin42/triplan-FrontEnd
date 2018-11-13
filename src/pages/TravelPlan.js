@@ -3,7 +3,7 @@ import { Accordion, Icon, List, Segment } from 'semantic-ui-react'
 
 class TravelPlan extends Component {
 
-  state = { activeIndex: 0 }
+  state = { activeIndex: "" }
 
   handleClick = (e, titleProps) => {
     const { index } = titleProps
@@ -32,7 +32,7 @@ class TravelPlan extends Component {
                         <List.Item>
                           <List.Content>
                             <List.Header>{plan.location_name}</List.Header>
-                            {plan.start_time && plan.end_time ? <List.Description>{plan.start_time + " ~ " + plan.end_time}</List.Description> : null}
+                            {plan.start_time && plan.end_time ? <List.Description>{plan.start_time.replace(/[a-zA-Z]+/g, " ").slice(0, -8) + " ~ " + plan.end_time.replace(/[a-zA-Z]+/g, " ").slice(0, -8)}</List.Description> : null}
                             <List.Description>{plan.note}</List.Description>
                           </List.Content>
                         </List.Item>

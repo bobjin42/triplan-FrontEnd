@@ -1,7 +1,7 @@
 import { ADD_PLACES, ADD_TO_SELECTEDPOIS, REMOVE_FROM_SELECTEDPOIS, SCHEDUAL_PLACES,
   UPDATE_TARGETPLACE, START_DATE, END_DATE, CITY_DETAIL, POIS_DETAIL, GET_TARGET_ID,
   SET_CURRENT_USER, AUTHENTICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN, LOG_OUT, PLAN_DETAIL,
-  PUSH_PLAN_DETAIL, UPDATE_TRIP_ID, ADD_PLAN, FETCHING_POIS, FETCHED_POIS } from './actionTypes'
+  PUSH_PLAN_DETAIL, UPDATE_TRIP_ID, ADD_PLAN, FETCHING_POIS, FETCHED_POIS, ADD_TRIP } from './actionTypes'
 
 export const addPlaces = (places) => ({
   type: ADD_PLACES,
@@ -87,6 +87,11 @@ export const addPlan = (planIns) => ({
   payload: planIns
 })
 
+export const addTrip = (trips) => ({
+  type: ADD_TRIP,
+  payload: trips
+})
+
 export const fetchTripId = () => {
   return (dispatch) => {
     fetch("http://localhost:3001/api/v1/trips")
@@ -102,6 +107,14 @@ export const fetchCityDetail = () => {
     fetch('http://localhost:5001/city')
     .then(res => res.json())
     .then(city => dispatch(cityDetail(city)))
+  }
+}
+
+export const fetchTrips = () => {
+  return (dispatch) => {
+    fetch('http://localhost:3001/api/v1/trips')
+    .then(res => res.json())
+    .then(trips => dispatch(addTrip(trips)))
   }
 }
 
@@ -140,8 +153,10 @@ export const createTrip = (user_id, trip_title, start_date, end_date) => {
     })
     .then(res => res.json())
     .then(places => {
-      dispatch(addPlaces(places))
-      dispatch({type: FETCHED_POIS})
+      if(places.status !== 500){
+        dispatch(addPlaces(places))
+        dispatch({type: FETCHED_POIS})
+      }
     })
   }
 }

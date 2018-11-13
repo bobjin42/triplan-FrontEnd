@@ -1,9 +1,10 @@
-import { UPDATE_TARGETPLACE, START_DATE, END_DATE } from '../actionTypes'
+import { UPDATE_TARGETPLACE, START_DATE, END_DATE, ADD_TRIP } from '../actionTypes'
 
 const defaultState = {
   targetPlace: "",
   startDate: "",
   endDate: "",
+  allTrips: []
 };
 
 function tripReducer(state = defaultState, action) {
@@ -14,6 +15,8 @@ function tripReducer(state = defaultState, action) {
       return {...state, startDate:action.payload};
     case END_DATE:
       return {...state, endDate:action.payload};
+    case ADD_TRIP:
+      return {...state, allTrips:action.payload};
     default:
       return state;
   }

@@ -26,7 +26,7 @@ import { createPlan } from '../store/actions'
     transition: background-color 0.2s ease;
     background-color:${props => (props.isDraggingOver ? 'lightgrey' : 'white')};
     flex-grow: 1;
-    min-height: 500px;
+    min-height: 600px;
   `;
 
   class Calender extends Component {

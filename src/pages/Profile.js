@@ -25,13 +25,15 @@ class Profile extends Component {
       <Fragment className="opcailty">
         <img src={img} />
         <div className="profile_card">
-          <Card >
+          <Card className="profile">
             <Card.Content>
               <Card.Header>{name}</Card.Header>
               <Card.Description>{email_address}</Card.Description>
             </Card.Content>
           </Card>
-          <TravelPlan travelPlans={this.state.usertravelPlan} />
+          <TravelPlan travelPlans={this.state.usertravelPlan.filter(travelPlan => {
+              return travelPlan.plans.length !== 0 && travelPlan.plans[0].end_time
+            })} />
         </div>
       </Fragment>
     );

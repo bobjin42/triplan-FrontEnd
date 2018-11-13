@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Table, TextArea, Input, Header, Image } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { planDetail, pushPlanDetail } from '../store/actions';
+import TimePicker from 'react-time-picker';
 
 class TimePlanRow extends Component {
 
@@ -39,6 +40,7 @@ class TimePlanRow extends Component {
   }
 
   render() {
+    const time = [{key: 1, text: '5:00', value: '5:00'}, {key: 2, text: '5:30', value: '5:30'}, {key: 3, text: '6:00', value: '6:00'}]
     return (
       <Table.Row>
         <Table.Cell>
@@ -68,3 +70,14 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { planDetail, pushPlanDetail })(TimePlanRow)
+// <TimePicker
+//   onChange={this.handleChange}
+//   value={this.state.start}
+//   name="start"
+// />
+// <TimePicker
+//   onChange={this.handleChange}
+//   value={this.state.end}
+//   name="end"
+// />
+// <Dropdown className="dropdown" name='start' placeholder='Select choice' scrolling options={time} onChange={this.handleChange}/>

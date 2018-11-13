@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Table, Form, Button, Segment } from 'semantic-ui-react'
 import TimePlanRow from './TimePlanRow';
@@ -13,14 +13,12 @@ class TimePlan extends Component {
   }
 
   render() {
-    const placesIds = this.props.schedualPlaces;
-
     return (
         <Segment className="planform">
           <Form onSubmit={this.handleSubmit} className="timeplantable">
             <Table selectable fixed basic='very' celled collapsing>
               <Table.Header>
-                <Table.Row>
+                <Table.Row className="tablerow">
                   <Table.HeaderCell width={5}>Name</Table.HeaderCell>
                   <Table.HeaderCell width={5}>Description</Table.HeaderCell>
                   <Table.HeaderCell width={3}>Schedual</Table.HeaderCell>
