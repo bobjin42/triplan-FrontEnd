@@ -22,11 +22,6 @@ goToPlan = () => {
   this.props.history.push('/plan')
 }
 
-// targerDetailPlace = (id) => {
-//   this.setState({
-//     targetId: id
-//   })
-// }
 
   render() {
     const panes = [
@@ -70,16 +65,16 @@ goToPlan = () => {
       </Tab.Pane> },
       { menuItem: {content:'Shared plans', icon:"share square"}, render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
     ]
-    return(
-      <Container style={{backgroundColor: "#E4E4E4"}}>
-          <Tab panes={panes} />
-        <Card.Group itemsPerRow={5}>
-          {this.props.places.map(place => {
-            return <PlaceDetail key={place.id} id={place.api_id} place={place}/>
-          })}
-        </Card.Group>
-      </Container>
-    )
+      return (
+         <Container style={{backgroundColor: "#E4E4E4"}}>
+            <Tab panes={panes} />
+          <Card.Group itemsPerRow={5}>
+            {this.props.places ? this.props.places.map(place => {
+              return <PlaceDetail key={place.id} id={place.api_id} place={place}/>
+            }) : null}
+          </Card.Group>
+        </Container>
+      )
   }
 }
 
@@ -89,7 +84,8 @@ goToPlan = () => {
       selectedPlaces: state.placeReducer.selectedPlaces,
       detailCity: state.placeReducer.detailCity,
       detailPlace: state.placeReducer.detailPlace,
-      targetPlace: state.tripReducer.targetPlace
+      targetPlace: state.tripReducer.targetPlace,
+      isLoading: state.placeReducer.isLoading
     }
   }
 

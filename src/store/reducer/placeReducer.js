@@ -1,5 +1,5 @@
 import { ADD_PLACES, ADD_TO_SELECTEDPOIS, REMOVE_FROM_SELECTEDPOIS, SCHEDUAL_PLACES,
-  CITY_DETAIL, POIS_DETAIL, GET_TARGET_ID, UPDATE_TRIP_ID } from '../actionTypes'
+  CITY_DETAIL, POIS_DETAIL, GET_TARGET_ID, UPDATE_TRIP_ID, FETCHING_POIS, FETCHED_POIS } from '../actionTypes'
 
 const defaultState = {
   places: [],
@@ -9,7 +9,7 @@ const defaultState = {
   targetDetailId: "",
   detailCity: [],
   tripId: "",
-  isLoading: true
+  isLoading: false
 };
 
 
@@ -31,6 +31,10 @@ function placeReducer(state = defaultState, action) {
       return {...state, targetDetailId: action.payload};
     case UPDATE_TRIP_ID:
       return {...state, tripId: action.payload};
+    case FETCHING_POIS:
+      return {...state, isLoading: true};
+    case FETCHED_POIS:
+      return {...state, isLoading: false};
   default:
     return state;
   }

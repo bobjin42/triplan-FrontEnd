@@ -46,13 +46,15 @@ class Home extends Component {
       clicked: !this.state.clicked
     })
     this.props.createTripInfo(this.props.user.id, this.props.targetPlace, this.props.startDateTrip, this.props.endDateTrip)
-      this.props.history.push('./show')
   }
 
   render() {
     const video = {
       src: '../icon/Untitled.mp4'
     }
+    if(!this.props.isLoading && this.props.places.length !== 0){
+        return <Redirect to="/show" />
+      } else {
     return (
       <Fragment>
         <div className="homeContainer">
@@ -80,12 +82,13 @@ class Home extends Component {
           </div>
         </div>
       </Fragment>
-    );
+    )}
   }
 }
 
 function mapStateToProps(state) {
   return{
+    places: state.placeReducer.places,
     user: state.usersReducer.user,
     startDateTrip: state.tripReducer.startDate,
     endDateTrip: state.tripReducer.endDate,

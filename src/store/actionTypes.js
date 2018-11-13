@@ -17,3 +17,5 @@ export const PLAN_DETAIL = 'plan_detail'
 export const PUSH_PLAN_DETAIL = 'push_plan_detail'
 export const UPDATE_TRIP_ID = 'update_trip_id'
 export const ADD_PLAN = 'add_plan';
+export const FETCHING_POIS = 'fetching_pois'
+export const FETCHED_POIS = 'fetched_pois'
