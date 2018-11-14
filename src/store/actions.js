@@ -118,14 +118,6 @@ export const fetchTripId = () => {
   }
 }
 
-export const fetchCityDetail = () => {
-  return (dispatch) => {
-    fetch('http://localhost:5001/city')
-    .then(res => res.json())
-    .then(city => dispatch(cityDetail(city)))
-  }
-}
-
 export const fetchTrips = () => {
   return (dispatch) => {
     fetch('http://localhost:3001/api/v1/trips')
@@ -146,6 +138,8 @@ export const updatePlan = (plan) => {
         plan
       })
     })
+    // .then(res => res.json())
+    // .then(data => dispatch(addTravelPlan(data)))
   }
 }
 

@@ -14,12 +14,13 @@ class TimePlan extends Component {
   handleSubmit = () => {
     this.props.updatePlan(this.props.plan)
     this.props.updateusertravelPlan(this.props.tripId, this.props.startDate.split("/").join("-"), this.props.endDate.split("/").join("-"), this.props.plan, this.props.targetPlace)
+    this.props.history.push('/profile')
   }
 
   render() {
-    if(this.props.usertravelPlan.length !== this.state.usertravelPlanlength){
-      return <Redirect to="/profile" />
-    } else {
+    // if(this.props.usertravelPlan && (this.props.usertravelPlan.length !== this.state.usertravelPlanlength)){
+      // return <Redirect to="/profile" />
+    // } else {
       return (
           <Segment className="planform">
             <Form onSubmit={this.handleSubmit} className="timeplantable">
@@ -28,8 +29,8 @@ class TimePlan extends Component {
                   <Table.Row className="tablerow">
                     <Table.HeaderCell width={5}>Name</Table.HeaderCell>
                     <Table.HeaderCell width={5}>Description</Table.HeaderCell>
-                    <Table.HeaderCell width={3}>Schedual</Table.HeaderCell>
-                    <Table.HeaderCell width={3}>notes</Table.HeaderCell>
+                    <Table.HeaderCell width={3}>Schedul</Table.HeaderCell>
+                    <Table.HeaderCell width={3}>Notes</Table.HeaderCell>
                   </Table.Row>
                 </Table.Header>
                 <Table.Body>
@@ -42,7 +43,6 @@ class TimePlan extends Component {
             </Form>
           </Segment>
       )
-    }
   }
 }
 

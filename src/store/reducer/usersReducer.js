@@ -28,9 +28,13 @@ const usersReducer = (state=defaultState, action) => {
     case LOG_OUT:
       return defaultState
     case TRAVEL_PLAN:
+      console.log("TRAVEL_PLAN ", state.usertravelPlan);
       return {...state, usertravelPlan: action.payload}
     case UPDATE_TRAVEL_PLAN:
+      console.log("UPDATE_TRAVEL_PLAN ", state.usertravelPlan);
       return {...state, usertravelPlan: [...state.usertravelPlan, action.payload]}
+      console.log("UPDATE_TRAVEL_PLAN_after ", state.usertravelPlan);
+
     default:
       return state
   }

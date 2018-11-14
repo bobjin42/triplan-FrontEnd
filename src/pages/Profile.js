@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Card } from 'semantic-ui-react'
+import { Card, Grid } from 'semantic-ui-react'
 import withAuth from '../hocs/withAuth'
 import TravelPlan from './TravelPlan';
 import { img } from '../icon/profile.jpeg';
@@ -19,17 +19,25 @@ class Profile extends Component {
   render() {
     const { name, email_address, usertravelPlan } = this.props
     return (
-      <div className="opcailty">
-        <div className="profile_card">
-          <Card className="profile">
-            <Card.Content>
-              <Card.Header>{name}</Card.Header>
-              <Card.Description>{email_address}</Card.Description>
-            </Card.Content>
-          </Card>
-          <TravelPlan travelPlan={usertravelPlan}/>
-        </div>
-      </div>
+      <Grid columns={2} padded='vertically'>
+        <Grid.Column width={6}>
+          <div className="trip_Plan">
+            <TravelPlan travelPlan={usertravelPlan} startDate={this.props.startDate} endDate={this.props.endDate} targetPlace={this.props.targetPlace}/>
+          </div>
+        </Grid.Column>
+        <Grid.Column width={10}>
+          <div className="opcailty">
+            <div className="profile_card">
+              <Card className="profile">
+                <Card.Content>
+                  <Card.Header>{name}</Card.Header>
+                  <Card.Description>{email_address}</Card.Description>
+                </Card.Content>
+              </Card>
+            </div>
+          </div>
+        </Grid.Column>
+      </Grid>
     );
   }
 
@@ -41,7 +49,10 @@ function mapStateToProps(state) {
     name: state.usersReducer.user.name,
     email_address: state.usersReducer.user.email_address,
     id: state.usersReducer.user.id,
-    usertravelPlan: state.usersReducer.usertravelPlan
+    usertravelPlan: state.usersReducer.usertravelPlan,
+    startDate: state.tripReducer.startDate,
+    endDate: state.tripReducer.endDate,
+    targetPlace: state.tripReducer.targetPlace
   }
 }
 
