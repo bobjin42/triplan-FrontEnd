@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
 import { Draggable } from 'react-beautiful-dnd'
-import { Modal, Input, Button, Divider, Header, Icon } from 'semantic-ui-react';
 
 const Container = styled.div`
   border: 1px solid lightgrey;

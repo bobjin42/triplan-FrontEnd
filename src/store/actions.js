@@ -1,7 +1,7 @@
 import { ADD_PLACES, ADD_TO_SELECTEDPOIS, REMOVE_FROM_SELECTEDPOIS, SCHEDUAL_PLACES,
   UPDATE_TARGETPLACE, START_DATE, END_DATE, CITY_DETAIL, POIS_DETAIL, GET_TARGET_ID,
-  SET_CURRENT_USER, AUTHENTICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN, LOG_OUT, PLAN_DETAIL,
-  PUSH_PLAN_DETAIL, UPDATE_TRIP_ID, ADD_PLAN, FETCHING_POIS, FETCHED_POIS, ADD_TRIP } from './actionTypes'
+  SET_CURRENT_USER, FAILED_LOGIN, LOG_OUT, PLAN_DETAIL,
+  PUSH_PLAN_DETAIL, UPDATE_TRIP_ID, ADD_PLAN, FETCHING_POIS, FETCHED_POIS, ADD_TRIP, TRAVEL_PLAN, UPDATE_TRAVEL_PLAN } from './actionTypes'
 
 export const addPlaces = (places) => ({
   type: ADD_PLACES,
@@ -90,6 +90,22 @@ export const addPlan = (planIns) => ({
 export const addTrip = (trips) => ({
   type: ADD_TRIP,
   payload: trips
+})
+
+export const addTravelPlan = (plan) => ({
+  type: TRAVEL_PLAN,
+  payload: plan
+})
+
+export const updateusertravelPlan = (trip_id, start_date, end_date, plans, trip_title) => ({
+  type: UPDATE_TRAVEL_PLAN,
+  payload: {
+    trip_id,
+    start_date,
+    end_date,
+    plans,
+    trip_title
+  }
 })
 
 export const fetchTripId = () => {

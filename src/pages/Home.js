@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import styled from 'styled-components'
 import Video from '../icon/Untitled.mp4'
-import { Icon, Input, Modal, Button, Label } from 'semantic-ui-react'
+import { Input, Modal, Button, Label } from 'semantic-ui-react'
 import { DateRange } from 'react-date-range';
 import { format } from 'date-fns'
 import { withRouter, Redirect } from 'react-router';

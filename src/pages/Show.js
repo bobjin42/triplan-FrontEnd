@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PlaceDetail from './PlaceDetail';
-import { Card, Tab, Button, Label, Item, Icon, Modal, Header, List } from 'semantic-ui-react';
+import { Card, Tab, Button, Label, Item, Icon, Modal, List } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { fetchCityDetail, fetchTripId, fetchTrips } from '../store/actions';
@@ -30,7 +30,7 @@ goToPlan = () => {
       })
     const panes = [
       { menuItem: {content:'POIs', icon: "heart"}, render: () => <Tab.Pane>
-        {this.props.selectedPlaces.map(place => <span className="labelpoi" ><Label image ><img src={place.thumbnail_url} />{place.name}</Label></span>)}
+        {this.props.selectedPlaces.map(place => <span className="labelpoi" ><Label image ><img src={place.thumbnail_url} alt="label"/>{place.name}</Label></span>)}
         {this.props.selectedPlaces.length === 0 ? null : <Button icon='hand point right outline' className="selectedpois_btn" secondary onClick={this.goToPlan}/>}</Tab.Pane>
       },
       { menuItem: {content:'City Detail', icon: "book"}, render: () => <Tab.Pane>

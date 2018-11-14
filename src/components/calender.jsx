@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
 import Poi from './poi';
 import { Droppable } from 'react-beautiful-dnd';
-import { Button, Icon } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { createPlan } from '../store/actions'

@@ -28,8 +28,6 @@ class Nav extends Component {
         {loggedIn ? (
           <Fragment>
             <Menu.Item as={NavLink} to='/' name='Home' active={pathname === '/'} />
-            <Menu.Item as={NavLink} to='/show' name='Show' active={pathname === '/show'} />
-            <Menu.Item as={NavLink} to='/plan' name='Plan' active={pathname === '/plan'}/>
             <Menu.Menu position="right">
             <Menu.Item as={NavLink} to='/profile' active={pathname === '/profile'}>{this.props.user.user ? `Hi ${this.props.user.user.name}` : null}</Menu.Item>
             <Menu.Item><Button onClick={this.handleOut}>Logout</Button></Menu.Item>

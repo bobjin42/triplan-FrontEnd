@@ -8,6 +8,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: url(./icon/background.jpeg) no-repeat center center fixed;
   background-size: auto;
+  overflow-y: scroll;
 }
 
 code {
@@ -221,4 +222,8 @@ code {
 
 .description {
   margin-left: 3%;
+}
+
+.ui.list .list>.item>.content, .ui.list>.item>.content {
+  padding: 10px
 }
