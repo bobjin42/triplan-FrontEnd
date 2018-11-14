@@ -28,41 +28,49 @@ goToPlan = () => {
     const avaiableTrips = this.props.allTrips.filter(travelPlan => {
         return travelPlan.plans.length !== 0 && travelPlan.plans[0].end_time
       })
+    const city_detail = this.props.places[0]
+    console.log(city_detail);
     const panes = [
       { menuItem: {content:'POIs', icon: "heart"}, render: () => <Tab.Pane>
         {this.props.selectedPlaces.map(place => <span className="labelpoi" ><Label image ><img src={place.thumbnail_url} alt="label"/>{place.name}</Label></span>)}
         {this.props.selectedPlaces.length === 0 ? null : <Button icon='hand point right outline' className="selectedpois_btn" secondary onClick={this.goToPlan}/>}</Tab.Pane>
       },
       { menuItem: {content:'City Detail', icon: "book"}, render: () => <Tab.Pane>
-      {this.props.detailCity[0]  ?
+      {city_detail.city  ?
         <Fragment>
           <Item>
-            <Item.Image className="cityDetailImg" size='tiny' src={this.props.detailCity[0].data.place.main_media.media[0].url}/>
+            <Item.Image className="cityDetailImg" size='tiny' src={city_detail.city.img}/>
             <Item.Content verticalAlign='middle'>
-            <Item.Header as="h3" className="citydetailHeader">{this.props.detailCity[0].data.place.name}</Item.Header>
+            <Item.Header as="h3" className="citydetailHeader">{city_detail.city.name}</Item.Header>
             <Item.Description>
-              <p>{this.props.detailCity[0].data.place.description.text}</p>
+              <p>{city_detail.city.description}</p>
             </Item.Description>
             </Item.Content>
           </Item>
           <Item.Extra>
-            <Label size="small" className="cityLabel">
-              <Icon name='internet explorer'/>
-              <a href={this.props.detailCity[0].data.place.references[1].url} target="_blank" rel="noopener noreferrer"> Offical Page </a>
-            </Label>
-            <Label size="small" className="cityLabel">
-              <Icon name='wikipedia w'/>
-              <a href={this.props.detailCity[0].data.place.references[0].url} target="_blank" rel="noopener noreferrer"> Wikipedia Page </a>
-            </Label>
-            <Label size="small" className="cityLabel">
-              <Icon name='bookmark'/>
-              <a href={this.props.detailCity[0].data.place.references[2].url} target="_blank" rel="noopener noreferrer"> Tour Guide Page </a>
-            </Label>
-            <Label size="small" className="cityLabel">
-              <Icon name='subway'/>
-              <a href={this.props.detailCity[0].data.place.references[3].url} target="_blank" rel="noopener noreferrer"> Subway Map </a>
-            </Label>
+          {city_detail.city.website ?
+             (<Label size="small" className="cityLabel">
+                          <Icon name='chrome'/>
+                          <a href={city_detail.city.website} target="_blank" rel="noopener noreferrer"> Offical Page </a>
+                        </Label>) : null}
 
+          {city_detail.city.wikipedia ?
+             (<Label size="small" className="cityLabel">
+                        <Icon name='wikipedia w'/>
+                        <a href={city_detail.city.wikipedia} target="_blank" rel="noopener noreferrer"> Wikipedia Page </a>
+                      </Label>) : null}
+
+          {city_detail.city.guide ?
+             (<Label size="small" className="cityLabel">
+                          <Icon name='bookmark'/>
+                          <a href={city_detail.city.guide} target="_blank" rel="noopener noreferrer"> Guide Page </a>
+                        </Label>) : null}
+
+          {city_detail.city.subway_map ?
+            (<Label size="small" className="cityLabel">
+                          <Icon name='subway'/>
+                          <a href={city_detail.city.subway} target="_blank" rel="noopener noreferrer"> Subway Map </a>
+                        </Label>) : null}
           </Item.Extra>
         </Fragment>
       : null}
