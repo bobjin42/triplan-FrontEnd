@@ -7,20 +7,15 @@ import { withRouter, Redirect } from 'react-router';
 
 class TimePlan extends Component {
 
-  state = {
-    usertravelPlanlength: this.props.usertravelPlan.length
-  }
-
   handleSubmit = () => {
     this.props.updatePlan(this.props.plan)
     this.props.updateusertravelPlan(this.props.tripId, this.props.startDate.split("/").join("-"), this.props.endDate.split("/").join("-"), this.props.plan, this.props.targetPlace)
-    this.props.history.push('/profile')
   }
 
   render() {
-    // if(this.props.usertravelPlan && (this.props.usertravelPlan.length !== this.state.usertravelPlanlength)){
-      // return <Redirect to="/profile" />
-    // } else {
+    if(this.props.updatePlancheck){
+      return <Redirect to="/profile" />
+    } else {
       return (
           <Segment className="planform">
             <Form onSubmit={this.handleSubmit} className="timeplantable">
@@ -43,6 +38,7 @@ class TimePlan extends Component {
             </Form>
           </Segment>
       )
+    }
   }
 }
 
@@ -57,7 +53,8 @@ function mapStateToProps(state) {
     usertravelPlan: state.usersReducer.usertravelPlan,
     startDate: state.tripReducer.startDate,
     endDate: state.tripReducer.endDate,
-    targetPlace: state.tripReducer.targetPlace
+    targetPlace: state.tripReducer.targetPlace,
+    updatePlancheck: state.planReducer.updatePlancheck
   }
 }
 

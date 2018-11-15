@@ -1,7 +1,8 @@
 import { ADD_PLACES, ADD_TO_SELECTEDPOIS, REMOVE_FROM_SELECTEDPOIS, SCHEDUAL_PLACES,
   UPDATE_TARGETPLACE, START_DATE, END_DATE, CITY_DETAIL, POIS_DETAIL, GET_TARGET_ID,
   SET_CURRENT_USER, FAILED_LOGIN, LOG_OUT, PLAN_DETAIL,
-  PUSH_PLAN_DETAIL, UPDATE_TRIP_ID, ADD_PLAN, FETCHING_POIS, FETCHED_POIS, ADD_TRIP, TRAVEL_PLAN, UPDATE_TRAVEL_PLAN } from './actionTypes'
+  PUSH_PLAN_DETAIL, UPDATE_TRIP_ID, ADD_PLAN, FETCHING_POIS, FETCHED_POIS, ADD_TRIP,
+  TRAVEL_PLAN, UPDATE_TRAVEL_PLAN, PLAN_UPDATE } from './actionTypes'
 
 export const addPlaces = (places) => ({
   type: ADD_PLACES,
@@ -97,6 +98,12 @@ export const addTravelPlan = (plan) => ({
   payload: plan
 })
 
+export const planUpdate = (plan) => ({
+  type: PLAN_UPDATE,
+  payload: plan
+})
+
+
 export const updateusertravelPlan = (trip_id, start_date, end_date, plans, trip_title) => ({
   type: UPDATE_TRAVEL_PLAN,
   payload: {
@@ -138,8 +145,8 @@ export const updatePlan = (plan) => {
         plan
       })
     })
-    // .then(res => res.json())
-    // .then(data => dispatch(addTravelPlan(data)))
+    .then(res => res.json())
+    .then((data) => dispatch(planUpdate(data)))
   }
 }
 

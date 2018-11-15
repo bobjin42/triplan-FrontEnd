@@ -14,11 +14,11 @@ const usersReducer = (state=defaultState, action) => {
   switch (action.type) {
     case SET_CURRENT_USER:
       return { ...state, user: action.payload, loggedIn: true, authenticatingUser: false }
-    case AUTHENTICATING_USER: //tells the app we're fetching
+    case AUTHENTICATING_USER: 
       return { ...state, authenticatingUser: true }
     case AUTHENTICATED_USER:
       return { ...state, authenticatingUser: false }
-    case FAILED_LOGIN: //for error handling
+    case FAILED_LOGIN:
       return {
         ...state,
         failedLogin: true,
@@ -28,12 +28,9 @@ const usersReducer = (state=defaultState, action) => {
     case LOG_OUT:
       return defaultState
     case TRAVEL_PLAN:
-      console.log("TRAVEL_PLAN ", state.usertravelPlan);
       return {...state, usertravelPlan: action.payload}
     case UPDATE_TRAVEL_PLAN:
-      console.log("UPDATE_TRAVEL_PLAN ", state.usertravelPlan);
       return {...state, usertravelPlan: [...state.usertravelPlan, action.payload]}
-      console.log("UPDATE_TRAVEL_PLAN_after ", state.usertravelPlan);
 
     default:
       return state

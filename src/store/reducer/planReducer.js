@@ -1,8 +1,9 @@
-import { PLAN_DETAIL, PUSH_PLAN_DETAIL, ADD_PLAN } from '../actionTypes'
+import { PLAN_DETAIL, PUSH_PLAN_DETAIL, ADD_PLAN, PLAN_UPDATE } from '../actionTypes'
 
 const defaultState = {
   plan: [],
-  planIns: []
+  planIns: [],
+  updatePlancheck: false
 }
 
 function planReducer(state = defaultState, action){
@@ -20,6 +21,10 @@ function planReducer(state = defaultState, action){
       return {...state, plan: [...state.plan, action.payload]}
     case ADD_PLAN:
       return {...state, planIns: [...state.planIns, action.payload]}
+    case PLAN_UPDATE:
+      if(action.payload){
+        return {...state, updatePlancheck: true}
+      }
     default:
     return state
   }

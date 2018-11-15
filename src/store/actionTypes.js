@@ -23,3 +23,4 @@ export const ADD_TRIP = 'add_trip'
 export const FETCH_TRIPS ='fetch_trips'
 export const TRAVEL_PLAN = 'travel_plan'
 export const UPDATE_TRAVEL_PLAN = 'update_travel_plan'
+export const PLAN_UPDATE = "plan_update"
