@@ -8,13 +8,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-image: url(./icon/background.jpeg);
   background-size: cover;
+  background-position: center center;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  z-index: -10;
   overflow-y: scroll;
   background-repeat: repeat-y;
-  background-position: center center;
-  background-attachment: fixed;
-  position: relative;
-   overflow-y: scroll;
-   top: 0; right: 0; bottom: 0; left: 0
 }
 
 code {
@@ -144,7 +145,7 @@ code {
   padding-left: 40px;
   padding-top: 10px;
   padding-bottom: 20px;
-  margin-right: 200px
+  margin-right: 200px;
 }
 
 .travelPlan {
@@ -240,4 +241,10 @@ code {
   padding-left: 40px;
   padding-top: 10px;
   padding-bottom: 20px;
+  width: 400px;
+  margin-left: 160px;
+}
+
+#root > div.ui.vertically.padded.two.column.grid > div.six.wide.column > div > div > div {
+  height: 380px
 }

@@ -18,7 +18,7 @@ class TravelPlan extends Component {
     if(this.props.travelPlan !== []){
       return (
         <Segment className="opcailty">
-          <Accordion>
+          <Accordion styled>
             {this.props.travelPlan.map((travelPlan, index) => {
               return(
                 <Fragment key={index}>

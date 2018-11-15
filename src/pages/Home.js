@@ -60,6 +60,7 @@ class Home extends Component {
     return (
       <Fragment>
         <div className="homeContainer">
+          <img src="../icon.logo.png" alt="logo"/>
           <div className="slogansPosition">
             <h1 className="slogans">Travel is the only thing you buy</h1>
             <h1 className="slogans">that makes you rich :)</h1>
