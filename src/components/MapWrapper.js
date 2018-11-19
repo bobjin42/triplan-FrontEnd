@@ -31,8 +31,8 @@ class MapWrapper extends Component {
       <div id="mapid">
         <Map center={positions.length === 0 ? initialStart : positions[0]} zoom={12}>
          <TileLayer
-           url='https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png'
-           attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+           url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+           attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
          />
        {positions.map((position, index) => {
            return (
@@ -57,6 +57,8 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps)(MapWrapper);
 
-// {/* url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-// attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-// */}
+
+
+
+// url='https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png'
+// attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
