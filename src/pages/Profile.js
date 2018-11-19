@@ -19,26 +19,28 @@ class Profile extends Component {
   render() {
     const { name, email_address, usertravelPlan } = this.props
     return (
-      <Grid columns={2} padded='vertically'>
-        <Grid.Column width={6}>
-          <div className="opcailty">
-            <div className="profile_card">
-              <Card className="profile">
-                <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' />
-                <Card.Content>
-                  <Card.Header>{name}</Card.Header>
-                  <Card.Description>{email_address}</Card.Description>
-                </Card.Content>
-              </Card>
+      <div className="background">
+        <Grid columns={2} padded='vertically'>
+          <Grid.Column width={6}>
+            <div className="opcailty">
+              <div className="profile_card">
+                <Card className="profile">
+                  <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' />
+                  <Card.Content>
+                    <Card.Header>{name}</Card.Header>
+                    <Card.Description>{email_address}</Card.Description>
+                  </Card.Content>
+                </Card>
+              </div>
             </div>
-          </div>
-        </Grid.Column>
-        <Grid.Column width={10}>
-          <div className="trip_Plan">
-            <TravelPlan travelPlan={usertravelPlan} startDate={this.props.startDate} endDate={this.props.endDate} targetPlace={this.props.targetPlace}/>
-          </div>
-        </Grid.Column>
-      </Grid>
+          </Grid.Column>
+          <Grid.Column width={10}>
+            <div className="trip_Plan">
+              <TravelPlan travelPlan={usertravelPlan} startDate={this.props.startDate} endDate={this.props.endDate} targetPlace={this.props.targetPlace}/>
+            </div>
+          </Grid.Column>
+        </Grid>
+      </div>
     );
   }
 

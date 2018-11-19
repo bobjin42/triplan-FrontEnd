@@ -6,6 +6,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.background {
   background-image: url(./icon/background.jpeg);
   background-size: cover;
   background-position: center center;
@@ -13,7 +16,6 @@ body {
   top: 0;
   bottom: 0;
   height: 100vh;
-  z-index: -10;
   overflow-y: scroll;
   background-repeat: repeat-y;
 }
@@ -195,6 +197,7 @@ code {
   position: absolute;
   width: 48%;
   left: 28%;
+  top: 6%;
 }
 
 .loginbtn {

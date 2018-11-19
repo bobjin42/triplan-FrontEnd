@@ -28,31 +28,33 @@ handleSubmit = () => {
         return <Redirect to="/" />
       } else {
         return (
-          <Segment className="loginForm">
-            <Form size="mini" onSubmit={this.handleSubmit}>
-              <Form.Group>
-              <Form.Field className="loginInput">
-                <label>Name</label>
-                <input placeholder='Name' onChange={this.handleChange} name="name" value={this.state.name}/>
-              </Form.Field>
-              <Form.Field className="loginInput">
-                <label>Email</label>
-                <input placeholder='Email' onChange={this.handleChange} name="email_address" value={this.state.email_address}/>
-              </Form.Field>
-              </Form.Group>
-              <Form.Group>
-              <Form.Field className="loginInput">
-                <label>UserName</label>
-                <input placeholder='UserName' onChange={this.handleChange} name="username" value={this.state.username}/>
-              </Form.Field>
-              <Form.Field className="loginInput">
-                <label>Password</label>
-                <input placeholder='Password' onChange={this.handleChange} name="password" value={this.state.password}/>
-              </Form.Field>
-              </Form.Group>
-              <Button size="tiny" className="loginbtn" type='submit'>Submit</Button>
-            </Form>
-          </Segment>
+          <div className="background">
+            <Segment className="loginForm">
+              <Form size="mini" onSubmit={this.handleSubmit}>
+                <Form.Group>
+                  <Form.Field className="loginInput">
+                    <label>Name</label>
+                    <input placeholder='Name' onChange={this.handleChange} name="name" value={this.state.name}/>
+                  </Form.Field>
+                  <Form.Field className="loginInput">
+                    <label>Email</label>
+                    <input placeholder='Email' onChange={this.handleChange} name="email_address" value={this.state.email_address}/>
+                  </Form.Field>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Field className="loginInput">
+                    <label>UserName</label>
+                    <input placeholder='UserName' onChange={this.handleChange} name="username" value={this.state.username}/>
+                  </Form.Field>
+                  <Form.Field className="loginInput">
+                    <label>Password</label>
+                    <input placeholder='Password' onChange={this.handleChange} name="password" value={this.state.password}/>
+                  </Form.Field>
+                </Form.Group>
+                <Button size="tiny" className="loginbtn" type='submit'>Submit</Button>
+              </Form>
+            </Segment>
+          </div>
       );
     }
   }

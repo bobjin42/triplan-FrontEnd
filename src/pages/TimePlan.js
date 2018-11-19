@@ -24,7 +24,7 @@ class TimePlan extends Component {
                   <Table.Row className="tablerow">
                     <Table.HeaderCell width={5}>Name</Table.HeaderCell>
                     <Table.HeaderCell width={5}>Description</Table.HeaderCell>
-                    <Table.HeaderCell width={3}>Schedul</Table.HeaderCell>
+                    <Table.HeaderCell width={3}>Schedule</Table.HeaderCell>
                     <Table.HeaderCell width={3}>Notes</Table.HeaderCell>
                   </Table.Row>
                 </Table.Header>
