@@ -29,7 +29,8 @@ const Container = styled.div`
 class Home extends Component {
 
   state = {
-    clicked: false
+    clicked: false,
+    isLoading: this.props.isLoading
   }
 
   handleSelect = (range) => {
@@ -60,7 +61,6 @@ class Home extends Component {
     return (
       <Fragment>
         <div className="homeContainer">
-          <img src="../icon.logo.png" alt="logo"/>
           <div className="slogansPosition">
             <h1 className="slogans">Travel is the only thing you buy</h1>
             <h1 className="slogans">that makes you rich :)</h1>
@@ -73,7 +73,7 @@ class Home extends Component {
             <Container className="searchContainer">
               <Input onChange={this.handleChange} icon='plane' iconPosition='left' placeholder='Search places...' value={this.props.targetPlace} />
               {this.state.clicked && this.props.targetPlace === "" ?  <Label pointing>Please enter a destination</Label> : null}
-              {this.state.clicked && this.props.targetPlace !== ""  && this.props.places.length !== 0 ? <Label pointing>Please enter a valide destination name</Label> : null}
+              {this.state.clicked && this.props.targetPlace !== ""  && this.props.places.length === 0 ? <Label pointing>Please enter a valide destination name</Label> : null}
               <Modal trigger={<Input icon="calendar alternate outline" iconPosition='left' placeholder='Select your travel date ...'
                 value={this.props.startDateTrip && this.props.endDateTrip ? this.props.startDateTrip + " ~ " + this.props.endDateTrip : ""}/>}>
                 <DateRange
