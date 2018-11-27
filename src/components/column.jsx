@@ -17,8 +17,10 @@ const Container = styled.div`
 `;
 
 const Title = styled.h3`
-  padding: 8px;
-  color: red;
+  margin: 0px;
+  padding: 14px;
+  border: 4px solid lightgrey;
+  color: black;
 `;
 
 const TaskList = styled.div`

@@ -73,7 +73,6 @@ class Home extends Component {
             <Container className="searchContainer">
               <Input onChange={this.handleChange} icon='plane' iconPosition='left' placeholder='Search places...' value={this.props.targetPlace} />
               {this.state.clicked && this.props.targetPlace === "" ?  <Label pointing>Please enter a destination</Label> : null}
-              {this.state.clicked && this.props.targetPlace !== ""  && this.props.places.length !== 0 ? <Label pointing>Please enter a valide destination name</Label> : null}
               <Modal trigger={<Input icon="calendar alternate outline" iconPosition='left' placeholder='Select your travel date ...'
                 value={this.props.startDateTrip && this.props.endDateTrip ? this.props.startDateTrip + " ~ " + this.props.endDateTrip : ""}/>}>
                 <DateRange

@@ -17,8 +17,10 @@ import { createPlan } from '../store/actions'
   `;
 
   const Title = styled.h3`
-    padding: 8px;
-    color: red;
+    margin: 0px;
+    padding: 14px;
+    border: 4px solid lightgrey;
+    color: black;
   `;
 
   const TaskList = styled.div`
@@ -42,7 +44,7 @@ import { createPlan } from '../store/actions'
       return (
         <Fragment>
           <Container>
-            <Title>{this.props.calender.title}<Button onClick={this.goToTimePlan} basic floated='right'>Start Time Planer</Button></Title>
+            <Title>{this.props.calender.title}<Button onClick={this.goToTimePlan} basic floated='right' compact>Start Planer</Button></Title>
               <Droppable droppableId={this.props.calender.id}>
                 {(provided, snapshot) => (
                   <TaskList

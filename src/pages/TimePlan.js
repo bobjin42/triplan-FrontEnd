@@ -17,6 +17,7 @@ class TimePlan extends Component {
       return <Redirect to="/profile" />
     } else {
       return (
+        <div className="background">
           <Segment className="planform">
             <Form onSubmit={this.handleSubmit} className="timeplantable">
               <Table selectable fixed basic='very' celled collapsing>
@@ -37,6 +38,7 @@ class TimePlan extends Component {
               <Button type="submit" className="detailbtn" >Confirm my Plan</Button>
             </Form>
           </Segment>
+        </div>
       )
     }
   }
