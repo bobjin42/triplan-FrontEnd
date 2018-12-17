@@ -170,7 +170,6 @@ export const createTrip = (user_id, trip_title, start_date, end_date) => {
     })
     .then(res => res.json())
     .then(places => {
-      console.log(places);
       if(places.status !== 500){
         dispatch(addPlaces(places))
         dispatch({type: FETCHED_POIS})
