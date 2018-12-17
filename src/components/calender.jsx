@@ -12,7 +12,7 @@ import { createPlan } from '../store/actions'
     border: 4px solid lightgrey;
     border-radius: 1px;
     width: 350px;
-    height: 650px;
+    height: 540px;
     background-color: white
   `;
 
@@ -28,7 +28,7 @@ import { createPlan } from '../store/actions'
     transition: background-color 0.2s ease;
     background-color:${props => (props.isDraggingOver ? 'lightgrey' : 'white')};
     flex-grow: 1;
-    min-height: 600px;
+    min-height: 460px;
   `;
 
   class Calender extends Component {

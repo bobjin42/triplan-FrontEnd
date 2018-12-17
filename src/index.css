@@ -25,7 +25,7 @@ code {
     monospace;
 }
 
-#mapid { height: 650px; width: 490px  }
+#mapid { height: 540px; width: 490px  }
 
 .leaflet-container {
   height: 100%;

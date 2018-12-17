@@ -89,7 +89,7 @@ goToPlan = () => {
                     <List.Item>
                       <List.Content>
                         <List.Header>{plan.location_name}</List.Header>
-                        <List.Description>{plan.start_time && plan.end_time ? (plan.start_time.replace(/[a-zA-Z]+/g, " ").slice(0, -8) + " ~ " + plan.end_time.replace(/[a-zA-Z]+/g, " ").slice(0, -8)) : null}</List.Description>
+                        <List.Description>{plan.start_time && plan.end_time ? (plan.start_time.replace(/[a-zA-Z]+/g, " ").slice(10, -8) + " ~ " + plan.end_time.replace(/[a-zA-Z]+/g, " ").slice(10, -8)) : null}</List.Description>
                         <List.Description>{plan.note}</List.Description>
                       </List.Content>
                     </List.Item>
