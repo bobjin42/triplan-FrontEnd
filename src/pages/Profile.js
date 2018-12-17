@@ -9,7 +9,10 @@ import { addTravelPlan } from '../store/actions'
 class Profile extends Component {
 
   componentDidMount() {
-    fetch(`http://localhost:3001/api/v1/users/${this.props.id}`)
+    const endpoint = "http://localhost:3000/api/v1"
+    // const endpoint = "https://triplanback.herokuapp.com/api/v1"
+
+    fetch(`${endpoint}/users/${this.props.id}`)
     .then(res => res.json())
     .then(data => this.props.addTravelPlan(data.trips.filter(travelPlan => {
         return(travelPlan.plans.length !== 0 && travelPlan.plans[0].end_time)

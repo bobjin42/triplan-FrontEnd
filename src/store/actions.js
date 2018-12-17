@@ -4,6 +4,9 @@ import { ADD_PLACES, ADD_TO_SELECTEDPOIS, REMOVE_FROM_SELECTEDPOIS, SCHEDUAL_PLA
   PUSH_PLAN_DETAIL, UPDATE_TRIP_ID, ADD_PLAN, FETCHING_POIS, FETCHED_POIS, ADD_TRIP,
   TRAVEL_PLAN, UPDATE_TRAVEL_PLAN, PLAN_UPDATE } from './actionTypes'
 
+const endpoint = "http://localhost:3000/api/v1"
+// const endpoint = "https://triplanback.herokuapp.com/api/v1"
+
 export const addPlaces = (places) => ({
   type: ADD_PLACES,
   payload: places
@@ -117,7 +120,7 @@ export const updateusertravelPlan = (trip_id, start_date, end_date, plans, trip_
 
 export const fetchTripId = () => {
   return (dispatch) => {
-    fetch("http://localhost:3001/api/v1/trips")
+    fetch(`${endpoint}/trips`)
     .then(res => res.json())
     .then(trip => {
       dispatch(updateTripId(trip[trip.length -1].id))
@@ -127,7 +130,7 @@ export const fetchTripId = () => {
 
 export const fetchTrips = () => {
   return (dispatch) => {
-    fetch('http://localhost:3001/api/v1/trips')
+    fetch(`${endpoint}/trips`)
     .then(res => res.json())
     .then(trips => dispatch(addTrip(trips)))
   }
@@ -135,7 +138,7 @@ export const fetchTrips = () => {
 
 export const updatePlan = (plan) => {
   return (dispatch) => {
-    fetch('http://localhost:3001/api/v1/batch_update', {
+    fetch(`${endpoint}/batch_update`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -153,7 +156,7 @@ export const updatePlan = (plan) => {
 export const createTrip = (user_id, trip_title, start_date, end_date) => {
   return (dispatch) => {
     dispatch({type: FETCHING_POIS})
-    fetch('http://localhost:3001/api/v1/trips', {
+    fetch(`${endpoint}/trips`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -180,7 +183,7 @@ export const createTrip = (user_id, trip_title, start_date, end_date) => {
 
 export const createPlan = (trip_id, location_id) => {
   return (dispatch) => {
-    fetch('http://localhost:3001/api/v1/plans', {
+    fetch(`${endpoint}/plans`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -201,7 +204,7 @@ export const createPlan = (trip_id, location_id) => {
 export const loginUser = (username, password) => {
   return (dispatch) => {
     dispatch(authenticatingUser())
-    fetch('http://localhost:3001/api/v1/login', {
+    fetch(`${endpoint}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -231,7 +234,7 @@ export const loginUser = (username, password) => {
 export const fetchCurrentUser = () => {
   return (dispatch) => {
     dispatch(authenticatingUser())
-    fetch('http://localhost:3001/api/v1/profile', {
+    fetch(`${endpoint}/profile`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('jwt')}`
@@ -244,7 +247,7 @@ export const fetchCurrentUser = () => {
 
 export const signupUser = (username, password, name, email_address) => {
   return (dispatch) => {
-    fetch('http://localhost:3001/api/v1/users', {
+    fetch(`${endpoint}/users`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
