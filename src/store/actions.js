@@ -4,8 +4,8 @@ import { ADD_PLACES, ADD_TO_SELECTEDPOIS, REMOVE_FROM_SELECTEDPOIS, SCHEDUAL_PLA
   PUSH_PLAN_DETAIL, UPDATE_TRIP_ID, ADD_PLAN, FETCHING_POIS, FETCHED_POIS, ADD_TRIP,
   TRAVEL_PLAN, UPDATE_TRAVEL_PLAN, PLAN_UPDATE } from './actionTypes'
 
-const endpoint = "http://localhost:3000/api/v1"
-// const endpoint = "https://triplanback.herokuapp.com/api/v1"
+// const endpoint = "http://localhost:3000/api/v1"
+const endpoint = "https://triplanback.herokuapp.com/api/v1"
 
 export const addPlaces = (places) => ({
   type: ADD_PLACES,

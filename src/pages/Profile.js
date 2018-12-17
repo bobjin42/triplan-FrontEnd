@@ -9,8 +9,8 @@ import { addTravelPlan } from '../store/actions'
 class Profile extends Component {
 
   componentDidMount() {
-    const endpoint = "http://localhost:3000/api/v1"
-    // const endpoint = "https://triplanback.herokuapp.com/api/v1"
+    // const endpoint = "http://localhost:3000/api/v1"
+    const endpoint = "https://triplanback.herokuapp.com/api/v1"
 
     fetch(`${endpoint}/users/${this.props.id}`)
     .then(res => res.json())
